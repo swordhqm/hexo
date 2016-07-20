@@ -235,8 +235,8 @@
             
               
                 
-                <a class="post-title-link" href="/2016/07/20/hello/" itemprop="url">
-                  hello
+                <a class="post-title-link" href="/2016/07/20/hexo-about/" itemprop="url">
+                  About Hexo
                 </a>
               
             
@@ -249,14 +249,40 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-07-20T10:24:13-04:00" content="2016-07-20">
+            <time itemprop="dateCreated" datetime="2016-07-20T15:39:18-04:00" content="2016-07-20">
               2016-07-20
             </time>
           </span>
 
           
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Hexo/" itemprop="url" rel="index">
+                    <span itemprop="name">Hexo</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
 
           
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/07/20/hexo-about/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/07/20/hexo-about/" itemprop="commentsCount"></span>
+                </a>
+              </span>
             
           
 
@@ -279,7 +305,31 @@
       
         
           
-            
+            <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo new <span class="string">"My New Post"</span></div></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># usally for local test</span></div><div class="line">$ hexo server</div></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo generate</div></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo deploy</div></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
+<h3 id="Relate-info"><a href="#Relate-info" class="headerlink" title="Relate info"></a>Relate info</h3><ul>
+<li><p>ref: <a href="https://wizardforcel.gitbooks.io/markdown-simple-world/content/hexo-tutor-7.html" target="_blank" rel="external">Markdown简单的世界</a></p>
+</li>
+<li><p>theme: <a href="https://github.com/iissnan/hexo-theme-next" target="_blank" rel="external">NexT</a></p>
+</li>
+</ul>
+<p>ps:<br>只需要在根下的_config.yml里替换掉theme就行, 其他的第三方可以在theme下的_config.yml里修改，比如说说评论和百度流量统计。<br>在部署的时候，留意github地址，比如<a href="https://swordhqm.github.io" target="_blank" rel="external">https://swordhqm.github.io</a>.<br>碰到问题，无法进入page是因为邮箱没有认证。</p>
+<ul>
+<li>create tags</li>
+</ul>
+<p>hex new page “tags” –创建标签页面<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">title: Tagcloud</div><div class="line">date: 2014-12-22 12:39:04</div><div class="line"><span class="built_in">type</span>: <span class="string">"tags"</span></div><div class="line">comments: <span class="literal">false</span> <span class="comment"># 关闭这个页面的多说或者 Disqus 评论</span></div></pre></td></tr></table></figure></p>
+<p>hex new page “My new Post” –设定tag 和 category<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">title: About Hexo</div><div class="line">tags: Hexo</div><div class="line">categories: Hexo</div></pre></td></tr></table></figure></p>
+<ul>
+<li>站内搜索和mp3<br><a href="http://jijiaxin89.com/2015/08/21/%E7%8E%A9%E8%BD%AChexo%E5%8D%9A%E5%AE%A2%E4%B9%8Bnext/" target="_blank" rel="external">url</a></li>
+</ul>
+
           
         
       
@@ -328,8 +378,8 @@
             
               
                 
-                <a class="post-title-link" href="/2016/07/18/hello-world/" itemprop="url">
-                  Hello World
+                <a class="post-title-link" href="/2016/07/20/hello/" itemprop="url">
+                  hello
                 </a>
               
             
@@ -342,14 +392,21 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-07-18T14:19:19-04:00" content="2016-07-18">
-              2016-07-18
+            <time itemprop="dateCreated" datetime="2016-07-20T10:24:13-04:00" content="2016-07-20">
+              2016-07-20
             </time>
           </span>
 
           
 
           
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/07/20/hello/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/07/20/hello/" itemprop="commentsCount"></span>
+                </a>
+              </span>
             
           
 
@@ -372,16 +429,7 @@
       
         
           
-            <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo new <span class="string">"My New Post"</span></div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo server</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo generate</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo deploy</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
-
+            
           
         
       
@@ -456,7 +504,21 @@
           </div>
 
           
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">分类</span>
+              
+            </div>
+          
 
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
           
 
         </nav>
@@ -581,9 +643,30 @@
 
   
 
+  
+    
+  
 
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"swordhqm"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
 
   
+    
+    <script src="/vendors/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
 
 
 
