@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="Hexo," />
 
 
 
@@ -88,11 +88,11 @@
 Quick">
 <meta property="og:type" content="article">
 <meta property="og:title" content="About Hexo">
-<meta property="og:url" content="http://yoursite.com/2016/07/20/hello-world/index.html">
+<meta property="og:url" content="http://yoursite.com/2016/07/20/hexo-about/index.html">
 <meta property="og:site_name" content="HQM">
 <meta property="og:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.
 Quick">
-<meta property="og:updated_time" content="2016-07-20T18:38:35.671Z">
+<meta property="og:updated_time" content="2016-07-20T19:39:18.766Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="About Hexo">
 <meta name="twitter:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.
@@ -117,7 +117,7 @@ Quick">
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2016/07/20/hello-world/"/>
+  <link rel="canonical" href="http://yoursite.com/2016/07/20/hexo-about/"/>
 
   <title> About Hexo | HQM </title>
 </head>
@@ -251,19 +251,38 @@ Quick">
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-07-20T14:38:35-04:00" content="2016-07-20">
+            <time itemprop="dateCreated" datetime="2016-07-20T15:39:18-04:00" content="2016-07-20">
               2016-07-20
             </time>
           </span>
 
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Hexo/" itemprop="url" rel="index">
+                    <span itemprop="name">Hexo</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
           
 
           
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/07/20/hello-world/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/07/20/hello-world/" itemprop="commentsCount"></span>
+                <a href="/2016/07/20/hexo-about/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/07/20/hexo-about/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -301,7 +320,15 @@ Quick">
 <li><p>theme: <a href="https://github.com/iissnan/hexo-theme-next" target="_blank" rel="external">NexT</a></p>
 </li>
 </ul>
-<p>ps:<br>只需要在根下的_config.yml里替换掉theme就行, 其他的第三方可以在theme下的_config.yml里修改，比如说说评论和百度流量统计。<br>在部署的时候，留意github地址，比如<a href="https://swordhqm.github.io" target="_blank" rel="external">https://swordhqm.github.io</a>. 碰到问题，无法进入page是因为邮箱没有认证。</p>
+<p>ps:<br>只需要在根下的_config.yml里替换掉theme就行, 其他的第三方可以在theme下的_config.yml里修改，比如说说评论和百度流量统计。<br>在部署的时候，留意github地址，比如<a href="https://swordhqm.github.io" target="_blank" rel="external">https://swordhqm.github.io</a>.<br>碰到问题，无法进入page是因为邮箱没有认证。</p>
+<ul>
+<li>create tags</li>
+</ul>
+<p>hex new page “tags” –创建标签页面<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">title: Tagcloud</div><div class="line">date: 2014-12-22 12:39:04</div><div class="line"><span class="built_in">type</span>: <span class="string">"tags"</span></div><div class="line">comments: <span class="literal">false</span> <span class="comment"># 关闭这个页面的多说或者 Disqus 评论</span></div></pre></td></tr></table></figure></p>
+<p>hex new page “My new Post” –设定tag 和 category<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">title: About Hexo</div><div class="line">tags: Hexo</div><div class="line">categories: Hexo</div></pre></td></tr></table></figure></p>
+<ul>
+<li>站内搜索和mp3<br><a href="http://jijiaxin89.com/2015/08/21/%E7%8E%A9%E8%BD%AChexo%E5%8D%9A%E5%AE%A2%E4%B9%8Bnext/" target="_blank" rel="external">url</a></li>
+</ul>
 
       
     </div>
@@ -321,6 +348,12 @@ Quick">
     </div>
 
     <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Hexo/" rel="tag">#Hexo</a>
+          
+        </div>
       
 
       
@@ -359,8 +392,8 @@ Quick">
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2016/07/20/hello-world/"
-           data-title="About Hexo" data-url="http://yoursite.com/2016/07/20/hello-world/">
+      <div class="ds-thread" data-thread-key="2016/07/20/hexo-about/"
+           data-title="About Hexo" data-url="http://yoursite.com/2016/07/20/hexo-about/">
       </div>
     
   </div>
@@ -411,7 +444,21 @@ Quick">
           </div>
 
           
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">分类</span>
+              
+            </div>
+          
 
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
           
 
         </nav>
