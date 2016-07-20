@@ -69,5 +69,14 @@ tags: Hexo
 categories: Hexo
 ```
 
+hex new page "categories"
+
+```bash
+title: categories
+date: 2016-07-20 17:15:15
+type: "categories"
+comments: false
+```
+
 * 站内搜索和mp3
 [url](http://jijiaxin89.com/2015/08/21/%E7%8E%A9%E8%BD%AChexo%E5%8D%9A%E5%AE%A2%E4%B9%8Bnext/)
