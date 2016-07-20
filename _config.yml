@@ -65,10 +65,6 @@ pagination_dir: page
 ## Themes: https://hexo.io/themes/
 theme: next
 
-# ThirdParty
-## duoshuo
-duoshuo_shortname: swordhqm
-
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
