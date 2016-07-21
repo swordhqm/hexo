@@ -255,7 +255,7 @@
             
               
                 
-                <a class="post-title-link" href="/2016/07/20/hexo-about/" itemprop="url">
+                <a class="post-title-link" href="/2016/07/21/hexo-about/" itemprop="url">
                   About Hexo
                 </a>
               
@@ -269,8 +269,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-07-20T17:22:35-04:00" content="2016-07-20">
-              2016-07-20
+            <time itemprop="dateCreated" datetime="2016-07-21T09:45:57-04:00" content="2016-07-21">
+              2016-07-21
             </time>
           </span>
 
@@ -299,8 +299,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/07/20/hexo-about/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/07/20/hexo-about/" itemprop="commentsCount"></span>
+                <a href="/2016/07/21/hexo-about/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/07/21/hexo-about/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -326,7 +326,7 @@
         
           
             <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo new <span class="string">"My New Post"</span></div></pre></td></tr></table></figure>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ hexo new post <span class="string">"My New Post"</span> <span class="comment">#或者</span></div><div class="line">$ hex new <span class="string">"MyNew Post"</span></div></pre></td></tr></table></figure>
 <p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
 <h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># usally for local test</span></div><div class="line">$ hexo server</div></pre></td></tr></table></figure>
 <p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
@@ -335,12 +335,16 @@
 <h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo deploy</div></pre></td></tr></table></figure>
 <p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
 <h3 id="Relate-info"><a href="#Relate-info" class="headerlink" title="Relate info"></a>Relate info</h3><ul>
+<li><p>一些工具<br>看推荐用的<a href="https://www.yejinmo.com/sublime-text-3-3103/" target="_blank" rel="external">sublime text</a>, 需要先安装Package Control，然后安装Markdown相关的插件<br><a href="http://tongji.baidu.com/web/welcome/login" target="_blank" rel="external">http://tongji.baidu.com/web/welcome/login</a></p>
+</li>
 <li><p>ref: <a href="https://wizardforcel.gitbooks.io/markdown-simple-world/content/hexo-tutor-7.html" target="_blank" rel="external">Markdown简单的世界</a></p>
 </li>
 <li><p>theme: <a href="https://github.com/iissnan/hexo-theme-next" target="_blank" rel="external">NexT</a></p>
 </li>
 </ul>
-<p>ps:<br>只需要在根下的_config.yml里替换掉theme就行, 其他的第三方可以在theme下的_config.yml里修改，比如说说评论和百度流量统计。<br>在部署的时候，留意github地址，比如<a href="https://swordhqm.github.io" target="_blank" rel="external">https://swordhqm.github.io</a>.<br>碰到问题，无法进入page是因为邮箱没有认证。</p>
+<p>ps:<br>只需要在根下的_config.yml里替换掉theme就行, 其他的第三方可以在theme下的_config.yml里修改，比如说说评论和百度流量统计。<br>在部署的时候，留意github地址，比如<a href="https://swordhqm.github.io" target="_blank" rel="external">https://swordhqm.github.io</a>.<br>碰到问题，无法进入page是因为邮箱没有认证。<br>hexo 正常有三种，post，page，draft，其中draft的可以通过publish 回到post<br>hexo 代码块的高亮是通过<a href="http://highlightjs.readthedocs.io/en/latest/css-classes-reference.html" target="_blank" rel="external">highlight.js</a> 来完成高亮的</p>
+<p>表格语法</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">| 项目        | 价格   |  数量  |</div><div class="line">| --------   | -----:  | :----:  |</div><div class="line">| 计算机     | $1600 |   5     |</div><div class="line">| 手机        |   $12   |   12   |</div><div class="line">| 管线        |    $1    |  234  |</div></pre></td></tr></table></figure>
 <ul>
 <li>create tags</li>
 </ul>
@@ -351,6 +355,127 @@
 <ul>
 <li>站内搜索和mp3<br><a href="http://jijiaxin89.com/2015/08/21/%E7%8E%A9%E8%BD%AChexo%E5%8D%9A%E5%AE%A2%E4%B9%8Bnext/" target="_blank" rel="external">url</a></li>
 </ul>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/07/20/net-capture/" itemprop="url">
+                  net_capture
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-07-20T18:16:20-04:00" content="2016-07-20">
+              2016-07-20
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Web/" itemprop="url" rel="index">
+                    <span itemprop="name">Web</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/07/20/net-capture/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/07/20/net-capture/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="wireshark"><a href="#wireshark" class="headerlink" title="wireshark"></a>wireshark</h1><p>有linux和windows版本，没有仔细去找过，看起来不支持https的</p>
+<h1 id="fiddler"><a href="#fiddler" class="headerlink" title="fiddler"></a>fiddler</h1><p>能够支持https，看起来蛮好用</p>
 
           
         
@@ -542,7 +667,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">2</span>
+              <span class="site-state-item-count">3</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -550,7 +675,7 @@
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-count">3</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
