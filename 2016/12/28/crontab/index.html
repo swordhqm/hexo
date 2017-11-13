@@ -1,0 +1,718 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="Source
+Schedule Tasks on Linux Using CrontabIf you’ve got a website that’s heavy on your web server, you might want to run some processes like generating thumbnails or enriching data in the background">
+<meta property="og:type" content="article">
+<meta property="og:title" content="crontab">
+<meta property="og:url" content="http://yoursite.com/2016/12/28/crontab/index.html">
+<meta property="og:site_name" content="HQM">
+<meta property="og:description" content="Source
+Schedule Tasks on Linux Using CrontabIf you’ve got a website that’s heavy on your web server, you might want to run some processes like generating thumbnails or enriching data in the background">
+<meta property="og:updated_time" content="2016-12-28T19:21:26.839Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="crontab">
+<meta name="twitter:description" content="Source
+Schedule Tasks on Linux Using CrontabIf you’ve got a website that’s heavy on your web server, you might want to run some processes like generating thumbnails or enriching data in the background">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2016/12/28/crontab/"/>
+
+  <title> crontab | HQM </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?a5387da778a8415e415fe2e1439ac110";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">HQM</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                crontab
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-12-28T14:20:49-05:00" content="2016-12-28">
+              2016-12-28
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/reference/" itemprop="url" rel="index">
+                    <span itemprop="name">reference</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/12/28/crontab/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/12/28/crontab/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><a href="http://kvz.io/blog/2007/07/29/schedule-tasks-on-linux-using-crontab/" title="Permalink to Schedule Tasks on Linux Using Crontab" target="_blank" rel="external">Source</a></p>
+<h1 id="Schedule-Tasks-on-Linux-Using-Crontab"><a href="#Schedule-Tasks-on-Linux-Using-Crontab" class="headerlink" title="Schedule Tasks on Linux Using Crontab"></a>Schedule Tasks on Linux Using Crontab</h1><p>If you’ve got a website that’s heavy on your web server, you might want to run some processes like generating thumbnails or enriching data in the background. This way it can not interfere with the user interface. <a href="http://kvz.io/tag/linux/" target="_blank" rel="external">Linux</a> has a great program for this called cron. It allows tasks to be automatically run in the background at regular intervals. You could also use it to automatically create backups, synchronize files, <a href="http://kvz.io/blog/2007/07/29/schedule-automatic-updates-on-ubuntu/" target="_blank" rel="external">schedule updates</a>, and much more. Welcome to the wonderful world of <a href="http://kvz.io/tag/crontab/" target="_blank" rel="external">crontab</a>.</p>
+<h2 id="Crontab"><a href="#Crontab" class="headerlink" title="Crontab"></a>Crontab</h2><p>The crontab (cron derives from <em>chronos</em>, Greek for time; tab stands for <em>table</em>) command, found in Unix and Unix-like operating systems, is used to schedule commands to be executed periodically. To see what crontabs are currently running on your system, you can open a terminal and run:</p>
+<pre><code>$ sudo crontab -l
+</code></pre><p>To edit the list of <em>cronjobs</em> you can run:</p>
+<pre><code>$ sudo crontab -e
+</code></pre><p>This wil open a the default editor (could be vi or pico, if you want you can <a href="http://kvz.io/blog/2007/07/11/change-the-default-editor/" target="_blank" rel="external">change the default editor</a>) to let us manipulate the crontab. If you save and exit the editor, all your cronjobs are saved into crontab. Cronjobs are written in the following format:</p>
+<pre><code>* * * * * /bin/execute/this/script.sh
+</code></pre><h2 id="Scheduling-explained"><a href="#Scheduling-explained" class="headerlink" title="Scheduling explained"></a>Scheduling explained</h2><p>As you can see there are 5 stars. The stars represent different date parts in the following order:</p>
+<ul>
+<li>minute (from 0 to 59)</li>
+<li>hour (from 0 to 23)</li>
+<li>day of month (from 1 to 31)</li>
+<li>month (from 1 to 12)</li>
+<li>day of week (from 0 to 6) (0=Sunday)</li>
+</ul>
+<h3 id="Execute-every-minute"><a href="#Execute-every-minute" class="headerlink" title="Execute every minute"></a>Execute every minute</h3><p>If you leave the star, or asterisk, it means <strong>every</strong>. Maybe that’s a bit unclear. Let’s use the the previous example again:</p>
+<pre><code>* * * * * /bin/execute/this/script.sh
+</code></pre><p>They are all still asterisks! So this means execute <code>/bin/execute/this/script.sh</code>:</p>
+<ul>
+<li><strong>every</strong> minute</li>
+<li>of <strong>every</strong> hour</li>
+<li>of <strong>every</strong> day of the month</li>
+<li>of <strong>every</strong> month</li>
+<li>and <strong>every</strong> day in the week.</li>
+</ul>
+<p>In short: This script is being executed every minute. Without exception.</p>
+<h3 id="Execute-every-Friday-1AM"><a href="#Execute-every-Friday-1AM" class="headerlink" title="Execute every Friday 1AM"></a>Execute every Friday 1AM</h3><p>So if we want to schedule the script to run at 1AM every Friday, we would need the following cronjob:</p>
+<pre><code>0 1 * * 5 /bin/execute/this/script.sh
+</code></pre><p>Get it? The script is now being executed when the system clock hits:</p>
+<ul>
+<li>minute: <code>0</code></li>
+<li>of hour: <code>1</code></li>
+<li>of day of month: <code>*</code> (every day of month)</li>
+<li>of month: <code>*</code> (every month)</li>
+<li>and weekday: <code>5</code> (=Friday)</li>
+</ul>
+<h3 id="Execute-on-workdays-1AM"><a href="#Execute-on-workdays-1AM" class="headerlink" title="Execute on workdays 1AM"></a>Execute on workdays 1AM</h3><p>So if we want to schedule the script to Monday till Friday at 1 AM, we would need the following cronjob:</p>
+<pre><code>0 1 * * 1-5 /bin/execute/this/script.sh
+</code></pre><p>Get it? The script is now being executed when the system clock hits:</p>
+<ul>
+<li>minute: <code>0</code></li>
+<li>of hour: <code>1</code></li>
+<li>of day of month: <code>*</code> (every day of month)</li>
+<li>of month: <code>*</code> (every month)</li>
+<li>and weekday: <code>1-5</code> (=Monday til Friday)</li>
+</ul>
+<h3 id="Execute-10-past-after-every-hour-on-the-1st-of-every-month"><a href="#Execute-10-past-after-every-hour-on-the-1st-of-every-month" class="headerlink" title="Execute 10 past after every hour on the 1st of every month"></a>Execute 10 past after every hour on the 1st of every month</h3><p>Here’s another one, just for practicing</p>
+<pre><code>10 * 1 * * /bin/execute/this/script.sh
+</code></pre><p>Fair enough, it takes some getting used to, but it offers great flexibility.</p>
+<h2 id="Neat-scheduling-tricks"><a href="#Neat-scheduling-tricks" class="headerlink" title="Neat scheduling tricks"></a>Neat scheduling tricks</h2><p>What if you’d want to run something every 10 minutes? Well you could do this:</p>
+<pre><code>0,10,20,30,40,50 * * * * /bin/execute/this/script.sh
+</code></pre><p>But crontab allows you to do this as well:</p>
+<pre><code>*/10 * * * * /bin/execute/this/script.sh
+</code></pre><p>Which will do exactly the same. Can you do the the math? ; )</p>
+<h2 id="Special-words"><a href="#Special-words" class="headerlink" title="Special words"></a>Special words</h2><p>For the first (minute) field, you can also put in a keyword instead of a number:</p>
+<pre><code>@reboot     Run once, at startup
+@yearly     Run once  a year     &quot;0 0 1 1 *&quot;
+@annually   (same as  @yearly)
+@monthly    Run once  a month    &quot;0 0 1 * *&quot;
+@weekly     Run once  a week     &quot;0 0 * * 0&quot;
+@daily      Run once  a day      &quot;0 0 * * *&quot;
+@midnight   (same as  @daily)
+@hourly     Run once  an hour    &quot;0 * * * *&quot;
+</code></pre><p>Leaving the rest of the fields empty, this would be valid:</p>
+<pre><code>@daily /bin/execute/this/script.sh
+</code></pre><h2 id="Storing-the-crontab-output"><a href="#Storing-the-crontab-output" class="headerlink" title="Storing the crontab output"></a>Storing the crontab output</h2><p>By default cron saves the output of <code>/bin/execute/this/script.sh</code> in the user’s mailbox (root in this case). But it’s prettier if the output is saved in a separate logfile. Here’s how:</p>
+<pre><code>*/10 * * * * /bin/execute/this/script.sh &amp;gt;&amp;gt; /var/log/script_output.log 2&amp;gt;&amp;amp;1
+</code></pre><h3 id="Explained"><a href="#Explained" class="headerlink" title="Explained"></a>Explained</h3><p>Linux can report on different levels. There’s standard output (STDOUT) and standard errors (STDERR). STDOUT is marked 1, STDERR is marked 2. So the following statement tells Linux to store STDERR in STDOUT as well, creating one datastream for messages &amp; errors:</p>
+<pre><code>2&amp;gt;&amp;amp;1
+</code></pre><p>Now that we have 1 output stream, we can pour it into a file. Where <code>&amp;gt;</code> will overwrite the file, <code>&amp;gt;&amp;gt;</code> will append to the file. In this case we’d like to to append:</p>
+<pre><code>&amp;gt;&amp;gt; /var/log/script_output.log
+</code></pre><h2 id="Mailing-the-crontab-output"><a href="#Mailing-the-crontab-output" class="headerlink" title="Mailing the crontab output"></a>Mailing the crontab output</h2><p>By default cron saves the output in the user’s mailbox (root in this case) on the local system. But you can also configure crontab to forward all output to a real email address by starting your crontab with the following line:</p>
+<pre><code>MAILTO=&quot;yourname@yourdomain.com&quot;
+</code></pre><h3 id="Mailing-the-crontab-output-of-just-one-cronjob"><a href="#Mailing-the-crontab-output-of-just-one-cronjob" class="headerlink" title="Mailing the crontab output of just one cronjob"></a>Mailing the crontab output of just one cronjob</h3><p>If you’d rather receive only one cronjob’s output in your mail, make sure this package is installed:</p>
+<pre><code>$ aptitude install mailx
+</code></pre><p>And change the cronjob like this:</p>
+<pre><code>*/10 * * * * /bin/execute/this/script.sh 2&amp;gt;&amp;amp;1 | mail -s &quot;Cronjob ouput&quot; yourname@yourdomain.com
+</code></pre><h2 id="Trashing-the-crontab-output"><a href="#Trashing-the-crontab-output" class="headerlink" title="Trashing the crontab output"></a>Trashing the crontab output</h2><p>Now that’s easy:</p>
+<pre><code>*/10 * * * * /bin/execute/this/script.sh &amp;gt; /dev/null 2&amp;gt;&amp;amp;1
+</code></pre><p>Just pipe all the output to the null device, also known as the black hole. On Unix-like operating systems, <code>/dev/null</code> is a special file that discards all data written to it.</p>
+<h2 id="Caveats"><a href="#Caveats" class="headerlink" title="Caveats"></a>Caveats</h2><p>Many scripts are tested in a Bash environment with the <code>PATH</code> variable set. This way it’s possible your scripts work in your shell, but when run from cron (where the <code>PATH</code> variable is different), the script cannot find referenced executables, and fails.</p>
+<p>It’s not the job of the script to set <code>PATH</code>, it’s the responsibility of the caller, so it can help to <code>echo $PATH</code>, and put <code>PATH=&lt;the result=&quot;&quot;&gt;</code> at the top of your cron files (right below <code>MAILTO</code>).</p>
+<p>Posted in: <a href="http://kvz.io/categories/linux" target="_blank" rel="external">linux</a> <a href="http://kvz.io/categories/crontab" target="_blank" rel="external">crontab</a></p>
+<p>  </p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/12/23/memcached/" rel="next" title="memcached">
+                <i class="fa fa-chevron-left"></i> memcached
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/04/21/hexo-about/" rel="prev" title="About Hexo">
+                About Hexo <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/12/28/crontab/"
+           data-title="crontab" data-url="http://yoursite.com/2016/12/28/crontab/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="HQM" />
+          <p class="site-author-name" itemprop="name">HQM</p>
+          <p class="site-description motion-element" itemprop="description"></p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">15</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Schedule-Tasks-on-Linux-Using-Crontab"><span class="nav-number">1.</span> <span class="nav-text">Schedule Tasks on Linux Using Crontab</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Crontab"><span class="nav-number">1.1.</span> <span class="nav-text">Crontab</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Scheduling-explained"><span class="nav-number">1.2.</span> <span class="nav-text">Scheduling explained</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Execute-every-minute"><span class="nav-number">1.2.1.</span> <span class="nav-text">Execute every minute</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Execute-every-Friday-1AM"><span class="nav-number">1.2.2.</span> <span class="nav-text">Execute every Friday 1AM</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Execute-on-workdays-1AM"><span class="nav-number">1.2.3.</span> <span class="nav-text">Execute on workdays 1AM</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Execute-10-past-after-every-hour-on-the-1st-of-every-month"><span class="nav-number">1.2.4.</span> <span class="nav-text">Execute 10 past after every hour on the 1st of every month</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Neat-scheduling-tricks"><span class="nav-number">1.3.</span> <span class="nav-text">Neat scheduling tricks</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Special-words"><span class="nav-number">1.4.</span> <span class="nav-text">Special words</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Storing-the-crontab-output"><span class="nav-number">1.5.</span> <span class="nav-text">Storing the crontab output</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Explained"><span class="nav-number">1.5.1.</span> <span class="nav-text">Explained</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Mailing-the-crontab-output"><span class="nav-number">1.6.</span> <span class="nav-text">Mailing the crontab output</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Mailing-the-crontab-output-of-just-one-cronjob"><span class="nav-number">1.6.1.</span> <span class="nav-text">Mailing the crontab output of just one cronjob</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Trashing-the-crontab-output"><span class="nav-number">1.7.</span> <span class="nav-text">Trashing the crontab output</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Caveats"><span class="nav-number">1.8.</span> <span class="nav-text">Caveats</span></a></li></ol></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">HQM</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"swordhqm"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/vendors/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

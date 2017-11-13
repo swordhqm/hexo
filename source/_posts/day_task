@@ -1,0 +1,407 @@
+1. 点击订单号看不到RMA
+2. 修改挂接api holder
+
+
+
+2016-08-08：
+	用户账号 挂接问题 （看起来走了老账号方式）
+	Jeff outboud 
+
+	auth2.0
+	#目前已经基本走通google cloudprint 的api。
+	#方式：
+	1. 手动在cloudprint 上面添加打印机
+	2. 通过google 控制台添加auth2.0 认证，拿到clientid 和 secretkey
+	3. 通过auth2.0 相关库 比如
+		https://github.com/google/google-api-nodejs-client
+		获取tokens
+
+	access_token: 'ya29.Ci85A7At7FoMg2DklFU6huDvywYAS6-XZEfxSkVPACGv8K3McxZn2WFgwuG-drXMMQ',
+  	token_type: 'Bearer',
+    expires_in: 3600,
+    refresh_token: '1/kC2xybjLrAs3Y8Hv1VCjQS9aPBTv1EbQ9fyrzghHxEw'
+
+    4. 通过tokens和 auth库去访问api
+
+    5. gabby 这边提交出库plan fail 原因 url 太长，目前 修改部分 api 为 make_request_for_large_url 解决
+
+    6. 1292 plan 列表 detail 数量不对，打印的label 也不对， 修复
+
+    7. 芳姐 quicken
+
+2016-08-09
+	1. 帮vincent打包分到加拿大仓，系统重大bug，原因：调api少了指定具体地区信息，目前已经fix上去。 data部分 也通过修改超级出库状态，然
+	2. 1378 出库被后后续让gabby重新提交就好
+	3. jeff 针对out bound提了些建议：
+		3.1 submit friendly 提示  --- done 并且加入数量和fnsku验证
+		3.2 label print次数记录  --- done
+		3.3  常用box 的barcode 做成一张纸  --- TODO
+
+2016-08-10
+	1. 1311用户账号挂接， 简单分析下，看起来提交数据格式正常，需要联系客户解决，把想到的check方式 贴给gabby和vivian 以便第一手拿到数据check
+	2. 散单系统
+
+2016-08-11
+	1. 1338 提交近110 个箱子 报错，简单分析了下，没有办法解决，可能和 用的aws server相关，有limit
+	2. 调查1338 说的有个removal shpment数量不对，后续check 应该是对的，应该是其他原因，gabby已经和客户沟通
+	3.
+
+2016-08-12
+	1. lucus 修改的出库部分，今早gabby提交出库发现问题，看起来是code有些部分 不完善，修正应该可以
+	2. vip 部分confirmed 状态不能start，可能和先前改confirmed 状态可以改报价 然后lucus中间修改设定了custommed flag相关
+	3. 有个removal shipment 里的track 看起来是多track 实际上只有一个，另外一部分是前缀或许，目前改数据修正。
+
+2016-08-15
+	1. 1407 包裹核对，1Z63R63A0343159497，xxx 后面那个xxx对应的包裹不存在实际上以4个未知包裹寄过来的。
+	2. 仓库帮忙
+2016-08-16
+	1. google print这边有测试，看起来可以，但是看起来，打印速度比较慢， 需等待1分钟左右~
+2016-08-17
+	1. LODOP 看起来基本满足，测试过
+
+2016-08-18
+	1. jake 入库存在问题，目前修复
+
+
+
+
+2016-08-29
+	removal/views/return_shipment.py 
+		def change_tracking_number(request):  需要记录上传tracknumber 的时间
+
+
+2016-09-20
+
+audit 前提：
+	case1: Mix_Package_ID delivery
+	case2: Mix_Package_ID part-audited   Mix_Merchant_SKU audit_status = False
+	case3: Mix_Pakcage_ID exception, Mix_Merchant_SKU audit_status = False, Mix_Merchant_SKU exception_status False;
+
+
+超级出库数量不一致问题:
+B01D8T5KTU 5个
+
+但是出了11 个
+
+B01D8T5KTU	Womens Pink Victoria's Secret	B01LYUI39C	WOMENS GREEN BAY PACKERS Pink	X0017LCJLP	2
+
+B01D8T5KTU	Womens Pink Victoria's Secret	B01LYUI39C	WOMENS GREEN BAY PACKERS Pink	X0017LCJLP	5
+
+B01D8T5KTU	Womens Pink Victoria's Secret	B01LYUI39C	WOMENS GREEN BAY PACKERS Pink	X0017LCJLP	5
+
+32’（5个） + 58‘（11个）
+
+58' B01GYHBAUQ	Womens GREEN BAY PACKERS Pink	B01LYUI39C	WOMENS GREEN BAY PACKERS Pink	X0017LCJLP	4
+
+出库计划也是16个，但是源头不对~， 提交的数据形式是对的~
+
+
+32'
+MariaDB [FBA_Recall]> select * from Auto_FBA_Replenish_Plan where id = 2701;
++------+------------+----------------------+------------+-------------------------+-------------+--------------+-----+---------------------+---------------------+------+------+------------+------------+----------------+
+| id   | src_inv_id | amazon_account_id_id | des_inv_id | Inbound_Merchant_SKU_id | plan_status | complete_qty | qty | create_time         | last_modify_time    | fee  | note | admin_note | delete_qty | temp_Ready_QTY |
++------+------------+----------------------+------------+-------------------------+-------------+--------------+-----+---------------------+---------------------+------+------+------------+------------+----------------+
+| 2701 |      27647 |                  553 |      53501 |                   60263 | SUBMITTED   |            0 |   5 | 2016-10-12 07:23:08 | 2016-10-12 07:23:08 | 0.99 |      |            |          0 |              0 |
++------+------------+----------------------+------------+-------------------------+-------------+--------------+-----+---------------------+---------------------+------+------+------------+------------+----------------+
+1 row in set (0.00 sec)
+
+58'
+MariaDB [FBA_Recall]> select * from Auto_FBA_Replenish_Plan where id = 2591;
++------+------------+----------------------+------------+-------------------------+-------------+--------------+-----+---------------------+---------------------+------+------+------------+------------+----------------+
+| id   | src_inv_id | amazon_account_id_id | des_inv_id | Inbound_Merchant_SKU_id | plan_status | complete_qty | qty | create_time         | last_modify_time    | fee  | note | admin_note | delete_qty | temp_Ready_QTY |
++------+------------+----------------------+------------+-------------------------+-------------+--------------+-----+---------------------+---------------------+------+------+------------+------------+----------------+
+| 2591 |      37564 |                  553 |      53501 |                   60263 | SUBMITTED   |            0 |  11 | 2016-10-11 07:31:40 | 2016-10-11 07:31:40 | 0.99 |      |            |          0 |              8 |
++------+------------+----------------------+------------+-------------------------+-------------+--------------+-----+---------------------+---------------------+------+------+------------+------------+----------------+
+1 row in set (0.01 sec)
+
+
+
+
+
+def auto_replenish_admin_outbound(request)
+	replenish_list  [{}]
+		{'obj': auto_obj -- Auto_FBA_Replenish_Plan object, 'qty': int} ...
+
+filter_set , every item
+	(src_inv, merchant_sku)
+auto_obj_map
+	(merchant_sku, auto_obj)
+
+这里存在问题， merchant_sku 可以对应多个auto_obj。
+
+下面call api，
+comb_replenish_list 构建 merchant_sku , qty 对应关系， 提交API
+
+mws_return, 只会有merchant_sku, 以及数量信息
+
+如果mws_return 返回3个shipment
+
+
+
+================================================================================================================================================================
+仓库时间超期问题
+
+Inventory 核心信息 ASIN qty
+
+当前库存60 件，往前追溯该ASIN的removal 信息，时间上判断超期数量。
+过期数量 -----1183 rows in set (0.10 sec) 依然持有location。 换个角度理解，如果不是有过期过程，也会占用location。
+所以这部分，可能考虑在既定时间内销毁，自动清库位， 清库位的时候会把镜像写到特定位置存储，不可恢复。 这个超时时间，暂定63 + 30 = 90 天。
+销毁时间63 天，如果有收到用户请求，会修正这个既定的销毁时间，但是费率会调整，比如增加到某个范围。
+
+ManualInbound_Record
+combine_task 目的的ASIN 时间？
+allocate_Plan 的时间
+Mix_Merchant_SKU的时间
+
+
+t1 A 3
+
+t2 B 3
+
+t3 A - > B   A 0, B 6
+
+(tn - t3)*3 + (tn - t2)*3
+
+
+
+Inventory 里有配置仓储费
+
+MariaDB [FBA_Recall]> select distinct(Inventory.warehouse_price) from Inventory;
++-----------------+
+| warehouse_price |
++-----------------+
+|            0.04 |
+|            0.02 |
+|            0.08 |
+|            0.25 |
+|            0.75 |
+|            1.00 |
+|            0.00 |
++-----------------+
+7 rows in set (0.05 sec)
+
+脚本执行时间 是
+
+0 20 * * 3 /home/ec2-user/freshingstock/shell/ready_expired.sh
+
+每周三执行
+
+用户级时间调整，如果超过base时间，超过base时间按倍率计费。
+
+依然按周级别计算。
+
+实际操作情况：
+
+先分类：
+basetime 63;
+	已经超期 GA 进入超期状态 
+	暂未超期 GB 标准计费
+
+
+
+
+
+
+低于63 天，不影响
+低于63天，但是客户提前提出延长超期存储，比如延长到80天 ？继续按二段收费。
+已经超期，比如71天，提出延长超期存储， 比如延长到80天。
+63天超期费  +  处理费 +  9天二段收费。
+
+所以中间有个时间段 比如63 天后，保留expired的时间长度目前定位为30 天
+
+
+=============================================================================================================================================
+调整散单出库运费预估 自动选择最优
+
+1. 审核？
+2. 散单出库？
+
+warehouse/views/warehouse_mainpage.py
+
+散单出库时候，先估计运费，然后生成运单
+目前看来只有审核过的产品 才能够真正进行散单出库
+
+def system_shipment_submit(request):
+	与物流相关参数：
+	signature 签名服务
+	insurance 保险
+	seed 速度
+	人为判断选择物流目前。
+
+	service_one
+	service_two
+
+	内部
+		FEDEX：
+			地址验证
+
+
+redefine measure ---
+	measure just measure size & weight for each ASIN.
+	allow_shipment means that this ASIN has already been checked & measured by admin
+
+when to choose service ?
+	depends on shipping require (oneday , two day , slow or others)
+	currently simply support UPS & FEDEX
+	depends on weight & size
+
+	when measure choose the usually box type for each ASIN.
+	when shipping make sure size can't exceed S5.
+	if dimession is just actual the size of the product
+	physically shipping fee should only depends on actual box type & box weight
+
+
+l = filter(lambda x:x !=4,l)
+l = [ i for i in l if i !=4]
+l = [1,2,3,4]
+dellist = []
+for i in l:
+    if i == 4:
+        dellist.append(i)
+for i in dellist:
+    l.remove(i)
+
+关于利用sessionStorage 解决安全问题
+ https://blog.guya.net/2015/06/12/sharing-sessionstorage-between-tabs-for-secure-multi-tab-authentication/
+
+
+ 应该不是这个意思，他们都是实现保存用户信息的不同的手段 
+
+
+http 是无状态的协议，就是在用户浏览不同的网页之间不保存用户信息 
+但是后来的发展需要 http 在网页之间传递某些信息，所以出现了三种方式： 
+
+1。传递参数，就是在 网页后加参数： http://link?name=cinc 
+2。利用 cookie，把用户信息存放在 用户本地的机器上 
+3。利用 session 把用户信息存放在服务器 
+     每个 session 有一个 session id 
+     session id 可以存放在两个地方： 
+       1) 如果客户端支持 cookie，就把 session id 存放在 客户端的 cookie 里 
+       2) 如果客户端不支持 cookie ，就把 session id 作为参数在网页间传递，就是我们常看到的：http://link?jsessionid=jfdkjfkdjfdf 
+
+如果还不清楚，可以看看书，这里也有文档： 
+
+The Java Web Services Tutorial 
+http://java.sun.com/webservices/docs/1.0/tutorial/ 
+
+的 Java Servlet Technology 章节里的 Maintaining Client State 部分： 
+http://java.sun.com/webservices/docs/1.0/tutorial/doc/Servlets11.html
+
+json convert
+  +---------------+-------------------+
+    | JSON          | Python            |
+    +===============+===================+
+    | object        | dict              |
+    +---------------+-------------------+
+    | array         | list              |
+    +---------------+-------------------+
+    | string        | unicode           |
+    +---------------+-------------------+
+    | number (int)  | int, long         |
+    +---------------+-------------------+
+    | number (real) | float             |
+    +---------------+-------------------+
+    | true          | True              |
+    +---------------+-------------------+
+    | false         | False             |
+    +---------------+-------------------+
+    | null          | None              |
+    +---------------+-------------------+
+
+application/x-www-form-urlencoded
+和
+application/json
+
+的区别
+
+https://www.w3.org/TR/html401/interact/forms.html#h-17.13.4.1  解释了form 提交的详细过程：
+表单提交agent  数据组织 表单处理agent
+
+
+
+
+http://www.live-in.org/archives/274.html
+
+在python 中原则:
+	定义字符串：
+		str = u"Hello 你好！"
+
+
+ASCII
+　　ASCII是用来表示英文字符的一种编码规范，每个ASCII字符占用1个字节（8bits）。ASCII编码可以表示的最大字符数是256个，范围是0～255。八位一般只用低7位（最高位为0），共128个其中包括了控制字符、数字、大小写字母和其他一些符号。而最高位为1的另128个字符被称为“扩展ASCII码”，一般用来存放英文的制表符、部分音标字符等等的一些其他符号。
+
+Unicode字符集
+　　Unicode标准定义了一个字符集和几种编码。
+　　Unicode是国际组织制定的可以容纳世界上所有文字和符号的字符编码方案，可以只通过一个唯一的数字（Unicode码点）来访问和操作字符。Unicode用数字0-0x10FFFF来映射这些字符，最多可以容纳1114112个字符，或者说有1114112个码位。码位就是可以分配给字符的数字。UTF-8、UTF-16、UTF-32都是将数字转换到程序数据的编码方案。
+
+ISO 10646
+　　ISO 10646是一个国际标准编号，该标准的英文全称为：Information Technology - Universal Multiple - Octet Coded Character Set，简称UCS。中文全称为：信息技术--通用多八位编码字符集，亦称大字符集。这一标准为世界各种主要语文的字符（包括繁体及简体的中文字）及附加符号，编订统一的内码。
+　　ISO 10646标准由国际标准化组织ISO颁布，用来实现全球所有文种的统一编码。ISO 10646与unicode在编码的运作原理相同，从内容上来说是同步一致的。所以它们是互相兼容的。
+　　根据维基百科全书(http://zh.wikipedia.org/wiki/)的记载：历史上存在两个试图独立设计Unicode的组织，即国际标准化组织（ISO）和一个软件制造商的协会（unicode.org）。ISO开发了ISO 10646项目，Unicode协会开发了Unicode项目。在1991年前后，双方都认识到世界不需要两个不兼容的字符集。于是它们开始合并双方的工作成果，并为创立一个单一编码表而协同工作。从Unicode2.0开始，Unicode项目采用了与ISO 10646-1相同的字库和字码。目前两个项目仍都存在，并独立地公布各自的标准。
+
+UTF编码
+UTF= UCS Transformation Format （UCS转换格式），即怎样将Unicode定义的数字转换成程序数据。在Unicode字符编码模型中，编码格式（encoding form）指定如何将每个码点表示为一个或多个编码单元序列。Unicode标准提供了三种不同的编码格式，使用8位、16位和32位编码单元，分别为UTF-8、UTF-16、UTF-32。
+（1）UTF-32
+　　UTF-32是一种最简单的Unicode编码格式。每个Unicode码点被直接表示为一个32位的编码单元。UTF-32是一种固定宽度的字符编码格式。每个UTF-32编码单元的值与Unicode码点的值完全相同。
+（2）UTF-16
+　　在UTF-16中，在范围U+0000到U+FFFF间的码点使用一个单一的16位编码单元表示；而，在范围U+10000到U+10FFFF间的码点则使用一对16位编码单元表示，称作代理对(surrogate pair)。
+　　UTF-16优化了基本多语言平面(Basic Multilingual Plane)中字符的表示，即位于U+0000到U+FFFF范围内的字符。该范围包含了目前世界上所使用的书写系统中的绝大多数字符，每个字符只需要一个16位的编码单元。对于基本多语言平面，UTF-16可作为固定宽度的编码格式来有效使用。但对于增补字符，UTF-16需要两个16位的编码单元，意味着正式的UTF-16是一个变宽的编码格式。UTF-16是早期Unicode遗留下的历史产物，原本被设计成具有固定宽度的16位编码格式。为支持超过U+FFFF的增补字符，设立了代理机制。
+（3）UTF-8
+　　为满足基于ASCII，面向字节的系统的需要，Unicode标准中定义了第三种编码格式UTF-8。它是一种使用8位编码单元的变宽的编码格式。
+　　UTF-8编码格式对所有ASCII码点具有透明性。在U+0000到U+007F范围内的Unicode码点，被转换为UTF-8中单一的字节0x00到0x7F，与ASCII码没有区别。并且，从0x00到0x7F不会出现在其他Unicode码点的UTF-8表示中的任一字节中，保证了不存在歧义。
+　　实际表示ASCII字符的Unicode字符，将会编码成1个字节，并且UTF-8表示与ASCII字符表示是一样的。所有其他的Unicode字符转化成UTF-8将需要至少2个字节。每个字节由一个换码序列开始。第一个字节由唯一的换码序列，由n位1加一位0组成。n位1表示字符编码所需的字节数。
+
+例：
+E4 BD A0　　　　　　　　11100100 10111101 10100000
+这是“你”字的UTF-8编码
+4F 60　　　　　　　　　　01001111 01100000
+这是“你”的Unicode编码
+
+按照UTF-8的编码规则，分解如下：xxxx0100 xx111101 xx100000
+把除了x之外的数字拼接在一起，就变成“你”的Unicode编码了。
+注意UTF-8的最前面３个1，表示整个UTF-8串是由３个字节构成的。
+经过UTF-8编码之后，再也不会出现敏感字符了，因为最高位始终为1。
+
+以下是Unicode和UTF-8之间的转换关系表：
+U-00000000 - U-0000007F: 0xxxxxxx
+U-00000080 - U-000007FF: 110xxxxx 10xxxxxx
+U-00000800 - U-0000FFFF: 1110xxxx 10xxxxxx 10xxxxxx
+U-00010000 - U-001FFFFF: 11110xxx 10xxxxxx 10xxxxxx 10xxxxxx
+U-00200000 - U-03FFFFFF: 111110xx 10xxxxxx 10xxxxxx 10xxxxxx 10xxxxxx
+U-04000000 - U-7FFFFFFF: 1111110x 10xxxxxx 10xxxxxx 10xxxxxx 10xxxxxx 10xxxxxx
+
+Unicode编码转换到UTF-8,简单的把Unicode字节流套到x中就变成UTF-8了。﻿
+
+
+
+
+from functools import partial
+#execfile('private_shell/multi_audit.py')
+#create staff
+def test():
+    '''
+    aas = Amazon_Account.objects.all()
+    for aa in aas:
+        new_phone = aa.phone.replace('7245918786', '7247283550')
+        print aa.id, new_phone
+        aa.update(phone = new_phone)
+    '''
+    t1 = Timer(partial(xx)).repeat(1, 1)
+    print t1
+    
+def xx():
+    user_list = User.objects.all()
+    alert_list = []
+    unsellable_alert_list = []
+    global_setting = []
+    for _loop_i in user_list:
+        if (not _loop_i.is_superuser 
+            and not _loop_i.is_staff):
+            if _loop_i.user_profile.did_global:
+                global_setting.append({'id':_loop_i.id,'a':_loop_i.user_profile.global_2.key,'b':_loop_i.user_profile.global_3.key,'c':_loop_i.user_profile.global_5.key})
+            if _loop_i.user_profile.need_processed:
+                alert_list.append(_loop_i.id)
+            if _loop_i.user_profile.unsellable_need_processed:
+                unsellable_alert_list.append(_loop_i.id)
+
+

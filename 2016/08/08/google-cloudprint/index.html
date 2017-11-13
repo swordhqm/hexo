@@ -1,0 +1,657 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="open," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="cloudprint初衷，解决直接打印问题。寻求路径，jatoolsprinter, lodop. 怎么说呢，用chrome 去试着安装jatoolsprinter 插件，但是看起来并不work。lodop 有试过，看起来是ok的，非免费，大致机理，创建了一个local server，然后web 向local server交互，由local server直接和打印机交互，免费情况下，打印的东东底下">
+<meta property="og:type" content="article">
+<meta property="og:title" content="google_cloudprint">
+<meta property="og:url" content="http://yoursite.com/2016/08/08/google-cloudprint/index.html">
+<meta property="og:site_name" content="HQM">
+<meta property="og:description" content="cloudprint初衷，解决直接打印问题。寻求路径，jatoolsprinter, lodop. 怎么说呢，用chrome 去试着安装jatoolsprinter 插件，但是看起来并不work。lodop 有试过，看起来是ok的，非免费，大致机理，创建了一个local server，然后web 向local server交互，由local server直接和打印机交互，免费情况下，打印的东东底下">
+<meta property="og:updated_time" content="2016-08-08T20:34:06.302Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="google_cloudprint">
+<meta name="twitter:description" content="cloudprint初衷，解决直接打印问题。寻求路径，jatoolsprinter, lodop. 怎么说呢，用chrome 去试着安装jatoolsprinter 插件，但是看起来并不work。lodop 有试过，看起来是ok的，非免费，大致机理，创建了一个local server，然后web 向local server交互，由local server直接和打印机交互，免费情况下，打印的东东底下">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2016/08/08/google-cloudprint/"/>
+
+  <title> google_cloudprint | HQM </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?a5387da778a8415e415fe2e1439ac110";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">HQM</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                google_cloudprint
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-08-08T15:01:58-04:00" content="2016-08-08">
+              2016-08-08
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/08/08/google-cloudprint/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/08/08/google-cloudprint/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="cloudprint"><a href="#cloudprint" class="headerlink" title="cloudprint"></a>cloudprint</h1><p>初衷，解决直接打印问题。寻求路径，jatoolsprinter, lodop. 怎么说呢，用chrome 去试着安装jatoolsprinter 插件，但是看起来并不work。lodop 有试过，看起来是ok的，非免费，大致机理，创建了一个local server，然后web 向local server交互，由local server直接和打印机交互，免费情况下，打印的东东底下会有水印。若干时间后，注意到cloudprint，google cloudprint，可以直接通过<a href="chrome://devices/" target="_blank" rel="external">chrome device</a>, 添加设备到Google 云打印。</p>
+<pre><code>[首页](https://www.google.com/cloudprint/learn/printers.html)
+看起来有些打印机可以直接连接网络然后通过配置连接到Google 云打印
+传统打印机可以通过PC安装打印机驱动，然后通过PC 添加到Google 云打印
+不知道机理，如果浏览器无法直接控制打印机，那么Google 云打印可能是通过打印机驱动和远端server交互，然后app或者browser通过server和打印机交互。但是，对于Google cloud ready的设备也就是直接连接到云的设备可能是设备可以直接和server交互。
+</code></pre><h1 id="api"><a href="#api" class="headerlink" title="api"></a>api</h1><p>目前云端用户界面看起来还是测试版，而且竟然在API console看不到 cloudprint相关的东西</p>
+<p><a href="https://www.google.com/cloudprint#printers" target="_blank" rel="external">云端用户界面</a><br><a href="https://developers.google.com/cloud-print/" target="_blank" rel="external">cloudprint API</a><br><a href="https://console.developers.google.com/apis/credentials?project=cloudprinter-1470324129369" target="_blank" rel="external">API console</a></p>
+<p>目前找到一种方法能够走通cloudprint api。</p>
+<pre><code>方式：
+1. 手动在cloudprint 上面添加打印机，虽然点高级信息能看到printerid 和 proxy，但是由于没有auth2.0 认证，直接通过curl去访问是会fail，比如：
+curl &quot;https://www.google.com/cloudprint/getauthcode?printerid=26bce0fb-29d0-8bed-50c5-e23e76acb2ab&amp;oauth_client_id=48642476290-sbilb9g5o8lce06b2flecgblvh6q6a2n.apps.googleusercontent.com&quot; -H &quot;X-CloudPrint-Proxy&quot; -d &quot;&quot;
+2. 在API console 创建auth2.0 凭证，这里会有client id，secret key， 解决的是第三方服务和 service的信任问题，当用户在第三方 请求 service的资源，那么第三方会用这个凭证去向service 请求认证授权，用户授权后就会拿到authorization code.
+3. 关于auth2.0认证，这里简单描述 auth2.0是解决用户，service，和第三方的信任问题。
+用到 https://github.com/google/google-api-nodejs-client
+步骤，先通过client id, secret key获取到认证url，然后通过url拿到authorization code.
+    CLIENT_ID = &quot;48642476290-sbilb9g5o8lce06b2flecgblvh6q6a2n.apps.googleusercontent.com&quot;;
+    CLIENT_SECRET = &quot;CZijBuzzUQk6v9rS8f0meCLf&quot;;
+    REDIRECT_URL = &quot;urn:ietf:wg:oauth:2.0:oob&quot;;
+    var google = require(&apos;googleapis&apos;);
+    var OAuth2 = google.auth.OAuth2;
+    var oauth2Client = new OAuth2(CLIENT_ID, CLIENT_SECRET, REDIRECT_URL);
+    var scopes = [ 
+        &apos;https://www.googleapis.com/auth/cloudprint&apos;
+    ];
+    var url = oauth2Client.generateAuthUrl({
+        access_type:&apos;offline&apos;,
+        scope:scopes
+    })
+    至此获取到请求认证url，然后通过open 这个链接，用户授权后会拿到authorization code: &apos;4/ZjqYuMi04uH2KTK7Vd9ylEIbUnaeVLypJiZN7Bi2lKg&apos;.通过authorization code去拿token
+    oauth2Client.getToken(&apos;4/ZjqYuMi04uH2KTK7Vd9ylEIbUnaeVLypJiZN7Bi2lKg&apos;,  function(err, tokens){
+        if(!err) {
+            oauth2Client.setCredentials(tokens);
+            console.log(tokens)
+        }   
+    });
+    access_token: &apos;ya29.Ci85A7At7FoMg2DklFU6huDvywYAS6-XZEfxSkVPACGv8K3McxZn2WFgwuG-drXMMQ&apos;,
+    token_type: &apos;Bearer&apos;,
+    expires_in: 3600,
+    refresh_token: &apos;1/kC2xybjLrAs3Y8Hv1VCjQS9aPBTv1EbQ9fyrzghHxEw&apos;
+    拿到的token里会有access_token和refresh_token。 access_token有有效期，不过可以通过refresh_token去刷新。然后就可以通过nodejs 的第三方cloudprint 去测试api
+</code></pre>
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/open/" rel="tag">#open</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/08/02/python/" rel="next" title="python">
+                <i class="fa fa-chevron-left"></i> python
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/08/08/mysql/" rel="prev" title="mysql">
+                mysql <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/08/08/google-cloudprint/"
+           data-title="google_cloudprint" data-url="http://yoursite.com/2016/08/08/google-cloudprint/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="HQM" />
+          <p class="site-author-name" itemprop="name">HQM</p>
+          <p class="site-description motion-element" itemprop="description"></p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">15</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#cloudprint"><span class="nav-number">1.</span> <span class="nav-text">cloudprint</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#api"><span class="nav-number">2.</span> <span class="nav-text">api</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">HQM</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"swordhqm"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/vendors/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

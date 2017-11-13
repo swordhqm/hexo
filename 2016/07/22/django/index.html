@@ -1,0 +1,682 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="django," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="模板语法block 待添加123&amp;#123;% comment %&amp;#125;    注释&amp;#123;% endcomment %&amp;#125;
+12345678910#ll 是locals变量，假设长度为2&amp;#123;% for o in ll %&amp;#125;    &amp;lt;div class=&quot;&amp;#123;% cycle row1,row2,row3 as rows %&amp;#125;&quot;&amp;gt;&amp;l">
+<meta property="og:type" content="article">
+<meta property="og:title" content="django">
+<meta property="og:url" content="http://yoursite.com/2016/07/22/django/index.html">
+<meta property="og:site_name" content="HQM">
+<meta property="og:description" content="模板语法block 待添加123&amp;#123;% comment %&amp;#125;    注释&amp;#123;% endcomment %&amp;#125;
+12345678910#ll 是locals变量，假设长度为2&amp;#123;% for o in ll %&amp;#125;    &amp;lt;div class=&quot;&amp;#123;% cycle row1,row2,row3 as rows %&amp;#125;&quot;&amp;gt;&amp;l">
+<meta property="og:updated_time" content="2017-02-03T16:34:11.371Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="django">
+<meta name="twitter:description" content="模板语法block 待添加123&amp;#123;% comment %&amp;#125;    注释&amp;#123;% endcomment %&amp;#125;
+12345678910#ll 是locals变量，假设长度为2&amp;#123;% for o in ll %&amp;#125;    &amp;lt;div class=&quot;&amp;#123;% cycle row1,row2,row3 as rows %&amp;#125;&quot;&amp;gt;&amp;l">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2016/07/22/django/"/>
+
+  <title> django | HQM </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?a5387da778a8415e415fe2e1439ac110";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">HQM</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                django
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-07-22T17:38:14-04:00" content="2016-07-22">
+              2016-07-22
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/技术/" itemprop="url" rel="index">
+                    <span itemprop="name">技术</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/07/22/django/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/07/22/django/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="模板语法"><a href="#模板语法" class="headerlink" title="模板语法"></a>模板语法</h1><p>block 待添加<br><figure class="highlight django"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="comment">&#123;% comment %&#125;</span></div><div class="line">    注释</div><div class="line">&#123;% endcomment %&#125;</div></pre></td></tr></table></figure></p>
+<figure class="highlight django"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">#ll 是locals变量，假设长度为2</div><div class="line"><span class="template-tag">&#123;% <span class="name"><span class="name">for</span></span> o <span class="keyword">in</span> ll %&#125;</span></div><div class="line">    &lt;div class="<span class="template-tag">&#123;% <span class="name"><span class="name">cycle</span></span> row1,row2,row3 <span class="keyword">as</span> rows %&#125;</span>"&gt;&lt;/div&gt;</div><div class="line">    &lt;div class="<span class="template-tag">&#123;% <span class="name"><span class="name">cycle</span></span> rows %&#125;</span>"&gt;&lt;/div&gt;</div><div class="line"><span class="template-tag">&#123;% <span class="name"><span class="name">endfor</span></span> %&#125;</span></div><div class="line">输出页面</div><div class="line">&lt;div class="row1"&gt;&lt;/div&gt;</div><div class="line">&lt;div class="row2"&gt;&lt;/div&gt;</div><div class="line">&lt;div class="row3"&gt;&lt;/div&gt;</div><div class="line">&lt;div class="row1"&gt;&lt;/div&gt;</div></pre></td></tr></table></figure>
+<figure class="highlight django"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="template-tag">&#123;% <span class="name"><span class="name">debug</span></span> %&#125;</span> #可以输出cookie等debug信息</div></pre></td></tr></table></figure>
+<figure class="highlight django"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="template-tag">&#123;% <span class="name"><span class="name">extends</span></span> "base.html" %&#125;</span> (要有引号).继承名为"base.html"的父模板</div><div class="line"><span class="template-tag">&#123;% <span class="name"><span class="name">extends</span></span> variable %&#125;</span> 使用variable的值. 如果变量被计算成一个字符串，Django将会把它看成是父模版的名字。如果变量被计算到一个Template对象，Django将会使用那个对象作为一个父模版。</div></pre></td></tr></table></figure>
+<figure class="highlight django"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div></pre></td><td class="code"><pre><div class="line">针对字符串的过滤器</div><div class="line"><span class="template-tag">&#123;% <span class="name"><span class="name">filter</span></span> force_escape|<span class="name">lower</span>|<span class="name">add</span>:<span class="string">"5"</span>|<span class="name">addslashes</span>|<span class="name">capfirst</span>|<span class="name">center</span>:<span class="string">"50"</span>|<span class="name">cut</span>:<span class="string">"in"</span> %&#125;</span></div><div class="line">    This text will be HTML-escaped, and will appear in all lowercase.</div><div class="line"><span class="template-tag">&#123;% <span class="name"><span class="name">endfilter</span></span> %&#125;</span></div><div class="line"></div><div class="line">escape <span class="template-variable">&#123;&#123; string|<span class="name">escape</span> &#125;&#125;</span>：</div><div class="line">    "&amp;" to "&amp;amp;"</div><div class="line">    &lt; to "&amp;lt;"</div><div class="line">    &gt; to "&amp;gt;"</div><div class="line">    '"' (double quote) to '&amp;quot;'</div><div class="line">    "'" (single quote) to '&amp;#39;'</div><div class="line"></div><div class="line">fix_ampersands <span class="template-variable">&#123;&#123; string|fix_ampersands &#125;&#125;</span></div><div class="line">将 &amp; 符号替换为 &amp;amp; 实体</div><div class="line">linebreaks <span class="template-variable">&#123;&#123; string|<span class="name">linebreaks</span> &#125;&#125;</span></div><div class="line">    If value is Joel\nis a slug, the output will be &lt;p&gt;Joel&lt;br /&gt;is a slug&lt;/p&gt;.</div><div class="line">linebreaksbr <span class="template-variable">&#123;&#123; string|<span class="name">linebreaksbr</span> &#125;&#125;</span></div><div class="line">    If value is Joel\nis a slug, the output will be Joel&lt;br /&gt;is a slug.</div><div class="line">linenumbers <span class="template-variable">&#123;&#123; string|<span class="name">linenumbers</span> &#125;&#125;</span></div><div class="line">    带行号显示文本</div><div class="line">ljust</div><div class="line">    Left-aligns the value in a field of a given width.</div><div class="line">    "<span class="template-variable">&#123;&#123; value|<span class="name">ljust</span>:<span class="string">"10"</span> &#125;&#125;</span>"，the output will be "Django    ".</div><div class="line"></div><div class="line"></div><div class="line">针对value的过滤器</div><div class="line">date <span class="template-variable">&#123;&#123; value|<span class="name">date</span>:<span class="string">"F j, Y"</span> &#125;&#125;</span></div><div class="line">default <span class="template-variable">&#123;&#123; value|<span class="name">default</span>:<span class="string">"(N/A)"</span> &#125;&#125;</span></div><div class="line">default_if_none <span class="template-variable">&#123;&#123; value|<span class="name">default</span>_if_none:"(N/A)" &#125;&#125;</span></div><div class="line">divisibleby <span class="template-tag">&#123;% <span class="name"><span class="name">if</span></span> value|<span class="name">divisibleby</span>:<span class="string">"2"</span> %&#125;</span></div><div class="line">                Even!</div><div class="line">            <span class="template-tag">&#123;% <span class="name"><span class="name">else</span></span> %&#125;</span></div><div class="line">                Odd!</div><div class="line">            <span class="template-tag">&#123;% <span class="name"><span class="name">else</span></span> %&#125;</span></div><div class="line">filesizeformat <span class="template-variable">&#123;&#123; value|<span class="name">filesizeformat</span> &#125;&#125;</span></div><div class="line">floatformat</div><div class="line">get_digit</div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line">针对list的过滤器</div><div class="line">dictsort <span class="template-variable">&#123;&#123; list|<span class="name">dictsort</span>:<span class="string">"foo"</span> &#125;&#125;</span></div><div class="line">dictsortreversed <span class="template-variable">&#123;&#123; list|<span class="name">dictsortreversed</span>:<span class="string">"foo"</span> &#125;&#125;</span></div><div class="line">first <span class="template-variable">&#123;&#123; list|<span class="name">first</span> &#125;&#125;</span></div><div class="line">join <span class="template-variable">&#123;&#123; list|<span class="name">join</span>:<span class="string">", "</span> &#125;&#125;</span></div><div class="line">length <span class="template-variable">&#123;&#123; list|<span class="name">length</span> &#125;&#125;</span></div><div class="line">length_is </div><div class="line">    <span class="template-tag">&#123;% <span class="name"><span class="name">if</span></span> list|<span class="name">length</span>_is:"3" %&#125;</span></div><div class="line">        ...</div><div class="line">    <span class="template-tag">&#123;% <span class="name"><span class="name">endif</span></span> %&#125;</span></div></pre></td></tr></table></figure>
+<h1 id="csrf-问题"><a href="#csrf-问题" class="headerlink" title="csrf 问题"></a>csrf 问题</h1><p>目前这部分，一方面是@csrf_exempt这个可以搞定，还有就是<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">$.ajaxSetup(&#123; </div><div class="line">     beforeSend: <span class="function"><span class="keyword">function</span>(<span class="params">xhr, settings</span>) </span>&#123;</div><div class="line">         <span class="function"><span class="keyword">function</span> <span class="title">getCookie</span>(<span class="params">name</span>) </span>&#123;</div><div class="line">             <span class="keyword">var</span> cookieValue = <span class="literal">null</span>;</div><div class="line">             <span class="keyword">if</span> (<span class="built_in">document</span>.cookie &amp;&amp; <span class="built_in">document</span>.cookie != <span class="string">''</span>) &#123;</div><div class="line">                 <span class="keyword">var</span> cookies = <span class="built_in">document</span>.cookie.split(<span class="string">';'</span>);</div><div class="line">                 <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; cookies.length; i++) &#123;</div><div class="line">                     <span class="keyword">var</span> cookie = jQuery.trim(cookies[i]);</div><div class="line">                     <span class="comment">// Does this cookie string begin with the name we want?</span></div><div class="line">                     <span class="keyword">if</span> (cookie.substring(<span class="number">0</span>, name.length + <span class="number">1</span>) == (name + <span class="string">'='</span>)) &#123;</div><div class="line">                         cookieValue = <span class="built_in">decodeURIComponent</span>(cookie.substring(name.length + <span class="number">1</span>));</div><div class="line">                         <span class="keyword">break</span>;</div><div class="line">                     &#125;</div><div class="line">                 &#125;</div><div class="line">             &#125;</div><div class="line">             <span class="keyword">return</span> cookieValue;</div><div class="line">         &#125;</div><div class="line">         <span class="keyword">if</span> (!(<span class="regexp">/^http:.*/</span>.test(settings.url) || <span class="regexp">/^https:.*/</span>.test(settings.url))) &#123;</div><div class="line">             <span class="comment">// Only send the token to relative URLs i.e. locally.</span></div><div class="line">             xhr.setRequestHeader(<span class="string">"X-CSRFToken"</span>, getCookie(<span class="string">'csrftoken'</span>));</div><div class="line">         &#125;</div><div class="line">     &#125; </div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$.ajaxSetup(&#123;</div><div class="line">    data: &#123;csrfmiddlewaretoken: <span class="string">'&#123;&#123; csrf_token &#125;&#125;'</span> &#125;,</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&#123;% csrf_token %&#125; put in html templates inside <span class="tag">&lt;<span class="name">form</span>&gt;</span><span class="tag">&lt;/<span class="name">form</span>&gt;</span></div></pre></td></tr></table></figure>
+<h1 id="model-相关可以注意的地方"><a href="#model-相关可以注意的地方" class="headerlink" title="model 相关可以注意的地方"></a>model 相关可以注意的地方</h1><ul>
+<li><p>F 查询，可以用于处理并发</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">book = Book.objects.get (id=<span class="number">12</span>)</div><div class="line">    book = F (<span class="string">"quantity"</span>) <span class="number">-1</span>    <span class="comment">#F 把数据变动放到最后一刻 也就是save</span></div><div class="line">    book.save ()</div></pre></td></tr></table></figure>
+</li>
+<li><p>zz</p>
+</li>
+</ul>
+<h1 id="django-rest-framework"><a href="#django-rest-framework" class="headerlink" title="django rest framework"></a>django rest framework</h1><p><a href="https://segmentfault.com/a/1190000004401112" target="_blank" rel="external">django restful</a><br><a href="https://godjango.com/41-start-your-api-django-rest-framework-part-1/" target="_blank" rel="external">django restful</a></p>
+<h1 id="django-优化"><a href="#django-优化" class="headerlink" title="django 优化"></a>django 优化</h1><h2 id="cache"><a href="#cache" class="headerlink" title="cache"></a>cache</h2><pre><code>其实有分类型，一种是客户端的cache， 一种是server端cache，server端cache可以直接参照django的cache framework
+</code></pre><h3 id="client端cache"><a href="#client端cache" class="headerlink" title="client端cache"></a>client端cache</h3><p><a href="https://robinwinslow.uk/2016/02/25/adding-cache-headers-to-django/" target="_blank" rel="external">django client cache</a><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">主要思想就是整个页面缓存，这个还是和server端有些关系。server端的HttpResponse需要提供 Cache-Control, Expires, Last-Modified这几个参数。当前端刷新页面时候，就会参照这几个参数，决定是否去server端获取，意思是browser和proxie就会直接返回client端缓存的页面内容。但是测试看起来似乎有些不一致，看起来不管怎样请求都会进入server。</div><div class="line">ResponseHeaders: </div><div class="line">    Cache-Control:private, max-age=28800</div><div class="line">    CF-RAY:30e3e11e351156c3-IAD</div><div class="line">    Connection:keep-alive</div><div class="line">    Content-Encoding:gzip</div><div class="line">    Content-Language:zh-cn</div><div class="line">    Content-Type:text/html; charset=utf-8</div><div class="line">    Date:Thu, 08 Dec 2016 23:08:27 GMT</div><div class="line">    Expires:Fri, 09 Dec 2016 07:08:27 GMT</div><div class="line">    Last-Modified:Thu, 08 Dec 2016 23:08:27 GMT</div><div class="line">    Server:yunjiasu-nginx</div><div class="line">    Set-Cookie:csrftoken=5EZYLx2SQmz47uy1wX05KNQA1UZmDQqR; expires=Thu, 07-Dec-2017 23:08:27 GMT; Max-Age=31449600; Path=/</div><div class="line">    Transfer-Encoding:chunked</div><div class="line">    Vary:Cookie,Accept-Language</div><div class="line">    X-Frame-Options:SAMEORIGIN</div><div class="line">可以确认的是，引入django的cache middleware 就会自动在HttpResponse里添加对应响应头了。但是默认，django这种方式是不会处理任何caching headers。</div></pre></td></tr></table></figure></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">settings 改动</div><div class="line"></div><div class="line"> CACHE_MIDDLEWARE_SECONDS = <span class="number">0</span> <span class="comment">#not cache for page</span></div><div class="line"> </div><div class="line"> MIDDLEWARE_CLASSES = (</div><div class="line">    <span class="string">'django.middleware.cache.UpdateCacheMiddleware'</span>,</div><div class="line">    <span class="string">'django.middleware.cache.FetchFromCacheMiddleware'</span></div><div class="line"> )</div><div class="line"></div><div class="line"><span class="meta">@cache_control(private=True, max_age=3600*8)</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">login</span><span class="params">(request)</span>:</span></div><div class="line">    ...</div></pre></td></tr></table></figure>
+<p>静态文件的cache，这里需要用到whitenose，主要思想就是静态文件访问响应头也包含那几个响应头。</p>
+<p>存在问题，如果静态文件发生改变，不确定会不会刷新，好像不会，文中提到Django versioned static，就是更新后静态资源的url会通过hash变掉。</p>
+<p>但是 看起来 django 的<br>(r’^(?P<path></path>.*)$’, ‘django.views.static.serve’, {‘document_root’ : ‘/path/to/my/files/‘})，注:这种在django种只是做开发模式建议使用。<br>可以去看/usr/lib/python2.7/site-packages/django/static.py 里的方法，看起来会根据静态文件的st_mtime 也就是文件的最后修改时间，以及st_size,也就是文件大小，来构建HTTP response的信息：response[“Last-Modified”] = http_date(statobj.st_mtime)，那么下次访问如果没有改变，就会自动以HttpResponseNotModified()响应，也就是看到的304.<br>但是参照django的官方文档，通过STATIC_URL以及STATICFILES_DIRS配置静态文件大部分的静态文件，都是通过django 的staticfiles_storage 完成的。这个global 对象主要是提供所有静态文件的path。</p>
+<h1 id="关于短时间内多次提交问题"><a href="#关于短时间内多次提交问题" class="headerlink" title="关于短时间内多次提交问题"></a>关于短时间内多次提交问题</h1><p>这部分需要从应用场合上划分，绝对安全的要求（银行或者商城结算部分）和简单避免的要求（只需要盖住用户double click操作导致的数据问题）。这个问题扩展类型：</p>
+<ol>
+<li>鼠标出问题了，会自动连击，速度很快</li>
+<li>用户快速双击</li>
+<li>表单提交的默认行为，比如提交后，F5刷新提交。或者提交后虽然跳转到别的页面，点击返回继续提交。这种行为的原因是表单submit提交，会通过url encode ? &amp; 拼接提交，所以如果刷新会再次提交。</li>
+</ol>
+<p>实际中一种是使用form 提交，另外就是ajax提交。这里提下，如果通过ajax来替代form提交，可以扣取原来form的验证flow，来达到验证提示的功能。ajax提交的好处，可以避免后退和刷新导致的数据重复提交问题。</p>
+<p>目前相关解法：</p>
+<ol>
+<li>提交后禁用按钮，</li>
+<li>弹出来一层loading的层，看起来可以避免双击问题。</li>
+<li>数据处理完，redirect到另外一个页面，这个主要是防止submit 重复提交，即用户主动性多次提交情况，不适合双击的情况，而且直接的redirect看起来无法避免后退刷新。需要用window.location或者操作location.history来避免。</li>
+<li>当表单创建时候，服务器端session提供token，然后以hidden形式加到表单里，提交时候，服务器验证是否一致，并标记已经提交。如果有重复的token过来，就可以判断了。<a href="https://www.boutell.com/newfaq/creating/stoprefresh.html" target="_blank" rel="external"><code>参考链接</code></a></li>
+</ol>
+<p>注：实际上鼠标双击这种，如果是鼠标本身问题导致双击触发，间隔很短可能在几us到几十us，这个时候禁用按钮或者添加一层layer都不一定能避免问题，比较好的方法就是利用javascript的eventloop和 同步ajax 请求来解决。看起来javascript event本身就是顺序执行的。</p>
+<h1 id="django-internationalization"><a href="#django-internationalization" class="headerlink" title="django internationalization"></a>django internationalization</h1><p>参考配置：<br>global_settings 中关于LANGUAGE 相关配置<br>/usr/lib64/python2.7/site-packages/django/contrib/admin/locale<br>里面有当前版本的locale 语言目录名字对应。神坑django 1.10 zh_Hans, zh_Hant.<br><a href="http://www.marinamele.com/taskbuster-django-tutorial/internationalization-localization-languages-time-zones#inter-settings" target="_blank" rel="external">参考</a></p>
+<p>一种方法：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#构建 template tag</span></div><div class="line"><span class="comment">#文件名langs.py, 对应后面template里使用  load langs.py</span></div><div class="line">register = template.Library()</div><div class="line"></div><div class="line"><span class="meta">@register.inclusion_tag('tags/languages_select_part.html')</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">language_select</span><span class="params">(default)</span>:</span></div><div class="line">    <span class="keyword">return</span> &#123;<span class="string">'languages'</span>:LANGUAGES, <span class="string">'default'</span>:default&#125;</div></pre></td></tr></table></figure></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="comment">&lt;!-- languages_select_part.html --&gt;</span></div><div class="line">&#123;% if languages %&#125;</div><div class="line"><span class="tag">&lt;<span class="name">form</span> <span class="attr">id</span>=<span class="string">"language-select-form"</span> <span class="attr">method</span>=<span class="string">"post"</span> <span class="attr">action</span>=<span class="string">"&#123;% url 'set_language' %&#125;"</span>&gt;</span>&#123;% csrf_token %&#125;</div><div class="line"><span class="tag">&lt;<span class="name">select</span> <span class="attr">class</span>=<span class="string">"dropdown"</span> <span class="attr">onchange</span>=<span class="string">"this.form.submit();"</span> <span class="attr">name</span>=<span class="string">"language"</span>&gt;</span></div><div class="line">&#123;% for lang in languages %&#125;</div><div class="line"><span class="tag">&lt;<span class="name">option</span> <span class="attr">value</span>=<span class="string">"&#123;&#123; lang.code &#125;&#125;"</span> &#123;% <span class="attr">if</span> <span class="attr">lang.code</span> == <span class="string">default</span> %&#125;<span class="attr">selected</span>=<span class="string">"selected"</span>&#123;% <span class="attr">endif</span> %&#125;&gt;</span></div><div class="line">&#123;&#123; lang.name_local &#125;&#125;</div><div class="line"><span class="tag">&lt;/<span class="name">option</span>&gt;</span></div><div class="line">&#123;% endfor %&#125;</div><div class="line"><span class="tag">&lt;/<span class="name">select</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">form</span>&gt;</span>&#123;% endif %&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#urls.py</span></div><div class="line">url(<span class="string">r'^i18n/'</span>, include(<span class="string">'django.conf.urls.i18n'</span>))</div></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="comment">&lt;!--模板中--&gt;</span></div><div class="line">&#123;% load i18n %&#125;&#123;% load langs %&#125;</div><div class="line"><span class="tag">&lt;<span class="name">li</span>&gt;</span>&#123;% language_select LANGUAGE_CODE %&#125;<span class="tag">&lt;/<span class="name">li</span>&gt;</span></div></pre></td></tr></table></figure>
+<h1 id="django-south"><a href="#django-south" class="headerlink" title="django south"></a>django south</h1><p>migrate back:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">python manage.py migrate postman zero</div></pre></td></tr></table></figure></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/django/" rel="tag">#django</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/07/20/net-capture/" rel="next" title="net_capture">
+                <i class="fa fa-chevron-left"></i> net_capture
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/07/22/html-css-javascript/" rel="prev" title="html+css+javascript">
+                html+css+javascript <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/07/22/django/"
+           data-title="django" data-url="http://yoursite.com/2016/07/22/django/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="HQM" />
+          <p class="site-author-name" itemprop="name">HQM</p>
+          <p class="site-description motion-element" itemprop="description"></p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">15</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#模板语法"><span class="nav-number">1.</span> <span class="nav-text">模板语法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#csrf-问题"><span class="nav-number">2.</span> <span class="nav-text">csrf 问题</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#model-相关可以注意的地方"><span class="nav-number">3.</span> <span class="nav-text">model 相关可以注意的地方</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#django-rest-framework"><span class="nav-number">4.</span> <span class="nav-text">django rest framework</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#django-优化"><span class="nav-number">5.</span> <span class="nav-text">django 优化</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#cache"><span class="nav-number">5.1.</span> <span class="nav-text">cache</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#client端cache"><span class="nav-number">5.1.1.</span> <span class="nav-text">client端cache</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#关于短时间内多次提交问题"><span class="nav-number">6.</span> <span class="nav-text">关于短时间内多次提交问题</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#django-internationalization"><span class="nav-number">7.</span> <span class="nav-text">django internationalization</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#django-south"><span class="nav-number">8.</span> <span class="nav-text">django south</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">HQM</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"swordhqm"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/vendors/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

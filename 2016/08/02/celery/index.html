@@ -1,0 +1,683 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="django,python," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="安装celery
+选择Broker  RabbitMQ  Redis  database:
+SQLAlchemy
+Django Database
+  others : Amazon SQS, Using MongoDB and IronMQ  推荐RabbitMQ
+  1234567sudo dnf install rabbitmq-serversystemctl start rabbitmq-s">
+<meta property="og:type" content="article">
+<meta property="og:title" content="celery">
+<meta property="og:url" content="http://yoursite.com/2016/08/02/celery/index.html">
+<meta property="og:site_name" content="HQM">
+<meta property="og:description" content="安装celery
+选择Broker  RabbitMQ  Redis  database:
+SQLAlchemy
+Django Database
+  others : Amazon SQS, Using MongoDB and IronMQ  推荐RabbitMQ
+  1234567sudo dnf install rabbitmq-serversystemctl start rabbitmq-s">
+<meta property="og:image" content="http://yoursite.com/img/flower_main.png">
+<meta property="og:image" content="http://yoursite.com/img/flower_worker_control.png">
+<meta property="og:updated_time" content="2016-12-23T16:20:52.860Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="celery">
+<meta name="twitter:description" content="安装celery
+选择Broker  RabbitMQ  Redis  database:
+SQLAlchemy
+Django Database
+  others : Amazon SQS, Using MongoDB and IronMQ  推荐RabbitMQ
+  1234567sudo dnf install rabbitmq-serversystemctl start rabbitmq-s">
+<meta name="twitter:image" content="http://yoursite.com/img/flower_main.png">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2016/08/02/celery/"/>
+
+  <title> celery | HQM </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?a5387da778a8415e415fe2e1439ac110";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">HQM</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                celery
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-08-02T16:05:48-04:00" content="2016-08-02">
+              2016-08-02
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/技术/" itemprop="url" rel="index">
+                    <span itemprop="name">技术</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/08/02/celery/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/08/02/celery/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="安装celery"><a href="#安装celery" class="headerlink" title="安装celery"></a>安装celery</h1><ul>
+<li><p>选择Broker<br>  RabbitMQ<br>  Redis<br>  database:</p>
+<pre><code>SQLAlchemy
+Django Database
+</code></pre><p>  others : Amazon SQS, Using MongoDB and IronMQ<br>  推荐RabbitMQ</p>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">sudo dnf install rabbitmq-server</div><div class="line">systemctl start rabbitmq-server.service</div><div class="line">systemctl <span class="built_in">enable</span> rabbitmq-server.service</div><div class="line">sudo rabbitmqctl add_user may_link password</div><div class="line">sudo rabbitmqctl add_vhost may_link</div><div class="line">sudo rabbitmqctl <span class="built_in">set</span>_user_tags may_link may_link</div><div class="line">sudo rabbitmqctl <span class="built_in">set</span>_permissions -p may_link may_link <span class="string">".*"</span> <span class="string">".*"</span> <span class="string">".*"</span></div></pre></td></tr></table></figure>
+<p>  amazon rabbitmq 安装方法<a href="http://linuxsystemhacks.blogspot.com/2013/08/how-to-install-and-configure-rabbitmq.html" target="_blank" rel="external">http://linuxsystemhacks.blogspot.com/2013/08/how-to-install-and-configure-rabbitmq.html</a></p>
+<p>  celery 启动</p>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">celery multi restart 1 -A FBA_Recall_Sys <span class="_">-l</span> info -c4 --logfile=celery1.log --pidfile=celery1.pid</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h1 id="使用example"><a href="#使用example" class="headerlink" title="使用example"></a>使用example</h1><h2 id="1-利用memcache-控制同一个task只会在同一时刻运行一个"><a href="#1-利用memcache-控制同一个task只会在同一时刻运行一个" class="headerlink" title="1.利用memcache 控制同一个task只会在同一时刻运行一个"></a>1.利用memcache 控制同一个task只会在同一时刻运行一个</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> __future__ <span class="keyword">import</span> absolute_import</div><div class="line"></div><div class="line"><span class="keyword">import</span> os</div><div class="line"></div><div class="line"><span class="keyword">from</span> celery <span class="keyword">import</span> Celery</div><div class="line"><span class="keyword">from</span> celery.task <span class="keyword">import</span> task</div><div class="line"><span class="keyword">from</span> celery.utils.log <span class="keyword">import</span> get_task_logger</div><div class="line"></div><div class="line"><span class="comment"># set the default Django settings module for the 'celery' program.</span></div><div class="line">os.environ.setdefault(<span class="string">'DJANGO_SETTINGS_MODULE'</span>, <span class="string">'FBA_Recall_Sys.settings'</span>)</div><div class="line"></div><div class="line">app = Celery(<span class="string">'FBA_Recall_Sys'</span>)</div><div class="line"></div><div class="line"><span class="comment"># Using a string here means the worker will not have to</span></div><div class="line"><span class="comment"># pickle the object when using Windows.</span></div><div class="line">app.config_from_object(<span class="string">'django.conf:settings'</span>)</div><div class="line">app.autodiscover_tasks(<span class="keyword">lambda</span>: settings.INSTALLED_APPS)</div><div class="line"></div><div class="line">logger = get_task_logger(__name__)</div><div class="line"></div><div class="line"><span class="keyword">from</span> FBA_Recall_Sys.models.replenish_plan <span class="keyword">import</span> *</div><div class="line"><span class="keyword">from</span> FBA_Recall_Sys.utils <span class="keyword">import</span> json_serialize,\</div><div class="line">    last_visit,getSplitParagraph,trk_processing,\</div><div class="line">    caculate_rate, generate_label_zip, draw_str_on_exsit,draw_on_exsit</div><div class="line"></div><div class="line"></div><div class="line"><span class="keyword">import</span> memcache</div><div class="line"><span class="keyword">from</span> django.conf <span class="keyword">import</span> settings</div><div class="line"><span class="keyword">from</span> hashlib <span class="keyword">import</span> md5</div><div class="line"></div><div class="line"><span class="keyword">import</span> time</div><div class="line"></div><div class="line">LOCK_EXPIRE = <span class="number">60</span> * <span class="number">5</span> <span class="comment"># Lock expires in 5 minutes</span></div><div class="line"></div><div class="line">mem_cache = memcache.Client([<span class="string">'127.0.0.1:11211'</span>])</div><div class="line">    </div><div class="line"><span class="meta">@app.task(bind=True)</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">debug_task</span><span class="params">(self)</span>:</span></div><div class="line">    p1 = self.name</div><div class="line">    p2 = <span class="string">'A'</span></div><div class="line">    lock_id = <span class="string">'&#123;0&#125;-lock-&#123;1&#125;'</span>.format(p1, p2)</div><div class="line">    </div><div class="line">    cache = mem_cache</div><div class="line">    <span class="comment"># cache.add fails if the key already exists</span></div><div class="line">    acquire_lock = <span class="keyword">lambda</span>: cache.add(<span class="string">'aa'</span>, <span class="string">'true'</span>, LOCK_EXPIRE)</div><div class="line">    <span class="comment"># memcache delete is very slow, but we have to use it to take</span></div><div class="line">    <span class="comment"># advantage of using add() for atomic locking</span></div><div class="line">    release_lock = <span class="keyword">lambda</span>: cache.delete(<span class="string">'aa'</span>)</div><div class="line">    logger.info(<span class="string">"########"</span> + str(cache.get(<span class="string">'aa'</span>)))</div><div class="line">    <span class="keyword">if</span> acquire_lock():</div><div class="line">        logger.info(<span class="string">"----------------------"</span> + str(cache) + <span class="string">"----"</span> + cache.get(<span class="string">'aa'</span>))</div><div class="line">        <span class="keyword">try</span> :</div><div class="line">            <span class="keyword">import</span> time</div><div class="line">            <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>, <span class="number">10</span>):</div><div class="line">                time.sleep(<span class="number">1</span>)</div><div class="line">            logger.info(<span class="string">"----"</span> + cache.get(<span class="string">"aa"</span>))</div><div class="line">            print(<span class="string">'Request: &#123;0!r&#125;'</span>.format(self.request))</div><div class="line">        <span class="keyword">except</span> Exception,e:</div><div class="line">            logger.exception(e)</div><div class="line">        <span class="keyword">finally</span>:</div><div class="line">            release_lock()</div><div class="line">    </div><div class="line"><span class="meta">@app.task(bind=True)</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">request_label_task</span><span class="params">(self, shipment_mark)</span>:</span></div><div class="line">    logger.info(<span class="string">"####task %s:%s"</span> % (__file__, __name__))</div><div class="line">    print(<span class="string">'Request: &#123;0!r&#125;'</span>.format(self.request))</div><div class="line">    p1 = self.name</div><div class="line">    p2 = shipment_mark</div><div class="line">    lock_id = <span class="string">'&#123;0&#125;-lock-&#123;1&#125;'</span>.format(p1, p2)</div><div class="line">    cache = mem_cache</div><div class="line">    <span class="comment"># cache.add fails if the key already exists</span></div><div class="line">    acquire_lock = <span class="keyword">lambda</span>: cache.add(lock_id, <span class="string">'true'</span>, LOCK_EXPIRE)</div><div class="line">    <span class="comment"># memcache delete is very slow, but we have to use it to take</span></div><div class="line">    <span class="comment"># advantage of using add() for atomic locking</span></div><div class="line">    release_lock = <span class="keyword">lambda</span>: cache.delete(lock_id)</div><div class="line">    <span class="keyword">if</span> acquire_lock():</div><div class="line">        <span class="keyword">try</span>:</div><div class="line">            replenish_shipment_obj = Replenish_Shipment.select(&#123;<span class="string">'Shipment_mark'</span>:shipment_mark&#125;, unique=<span class="keyword">True</span>)</div><div class="line">            <span class="keyword">if</span> <span class="keyword">not</span> replenish_shipment_obj:</div><div class="line">                <span class="keyword">return</span></div><div class="line">             </div><div class="line">            <span class="comment">#starting upload info &amp; check if generating label</span></div><div class="line">            _buf_object = replenish_shipment_obj.Replenish_Plan_ID</div><div class="line">            pck_object = replenish_shipment_obj</div><div class="line">            ps_object = pck_object</div><div class="line">            <span class="keyword">if</span> (<span class="keyword">not</span> replenish_shipment_obj.Replenish_Plan_ID.IS_MANUAL_SUBMIT <span class="keyword">and</span></div><div class="line">                <span class="keyword">not</span> replenish_shipment_obj.label_path):</div><div class="line">                mws_result = replenish_shipment_obj.get_label_for_2016_11_1(access_key=_buf_object.Amazon_account_ID.ACCESS_KEY,</div><div class="line">                                secret_key=_buf_object.Amazon_account_ID.SECRET_KEY,</div><div class="line">                                account_id=_buf_object.Amazon_account_ID.SELLER_ID,</div><div class="line">                                marketplaceid=_buf_object.Amazon_account_ID.Marketplace_ID,</div><div class="line">                                MWS_Auth_Token=_buf_object.Amazon_account_ID.MWS_Auth_Token,</div><div class="line">                                )</div><div class="line">                LABEL_FOLDER = settings.LABEL_FOLDER</div><div class="line">                filename = generate_label_zip(mws_result[<span class="string">'buf_pdfDocument'</span>],LABEL_FOLDER + ps_object.Shipment_ID + <span class="string">'-'</span> + str(time.time()).replace(<span class="string">'.'</span>,<span class="string">''</span>),<span class="string">'buf.zip'</span>)</div><div class="line">                desname = filename.replace(<span class="string">'PackageLabels'</span>,<span class="string">'Print'</span>)</div><div class="line">                draw_str_on_exsit(ps_object.Shipment_mark,filename,desname,x=<span class="number">500</span>,y=<span class="number">-590</span>,rotate=<span class="number">90</span>,fontSize=<span class="number">35</span>,auto_index=<span class="keyword">True</span>)</div><div class="line">                desname2 = filename.replace(<span class="string">'PackageLabels'</span>,<span class="string">'Print_ag'</span>)</div><div class="line">                draw_str_on_exsit(ps_object.Shipment_mark,desname,desname2,x=<span class="number">100</span>,y=<span class="number">-590</span>,rotate=<span class="number">90</span>,fontSize=<span class="number">35</span>,auto_index=<span class="keyword">True</span>)</div><div class="line">                desname3 = filename.replace(<span class="string">'PackageLabels'</span>,<span class="string">'Print_ag2'</span>)</div><div class="line">                draw_on_exsit(str(_buf_object.user_id.id),desname2,desname3,x1=<span class="number">100</span>,y1=<span class="number">-510</span>,x2=<span class="number">100</span>,y2=<span class="number">-530</span>,rotate=<span class="number">90</span>,fontSize=<span class="number">50</span>,auto_index=<span class="keyword">False</span>)</div><div class="line">                desname4 = filename.replace(<span class="string">'PackageLabels'</span>,<span class="string">'Print_ag3'</span>)</div><div class="line">                draw_on_exsit(str(_buf_object.user_id.id),desname3,desname4,x1=<span class="number">500</span>,y1=<span class="number">-510</span>,x2=<span class="number">500</span>,y2=<span class="number">-530</span>,rotate=<span class="number">90</span>,fontSize=<span class="number">50</span>,auto_index=<span class="keyword">False</span>)</div><div class="line">                ps_object.update(label_path=desname4)</div><div class="line">                ps_object.update(price=mws_result[<span class="string">'est_price'</span>][<span class="string">'Value'</span>] + <span class="string">' '</span> + mws_result[<span class="string">'est_price'</span>][<span class="string">'CurrencyCode'</span>])</div><div class="line">                ps_object.upload_tracking(mws_result[<span class="string">'tracking_number'</span>])</div><div class="line">        <span class="keyword">except</span> Exception,e:</div><div class="line">            logger.exception(e)</div><div class="line">        <span class="keyword">finally</span>:</div><div class="line">            release_lock()</div></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#settings.py 里修改添加amqp</span></div><div class="line">BROKER_URL = <span class="string">'amqp://may_link:password@localhost:5672/may_link'</span></div></pre></td></tr></table></figure>
+<h2 id="2-Periodic-Tasks（计划任务）"><a href="#2-Periodic-Tasks（计划任务）" class="headerlink" title="2.Periodic Tasks（计划任务）"></a>2.Periodic Tasks（计划任务）</h2><p><a href="http://docs.celeryproject.org/en/latest/userguide/periodic-tasks.html" target="_blank" rel="external">文档</a><br>需要考虑的东西：<br>    TimeZone<br>原理：<br>    通过add_periodic_task 将entry加入到app.conf.beat_schedule 配置。<br>启动：<br>    $ celery -A proj beat<br>    如果随着worker 启动也可以<br>    $ celery -A proj worker -B<br>    Beat needs to store the last run times of the tasks in a local database file (named celerybeat-schedule by default), so it needs access to write in the current directory, or alternatively you can specify a custom location for this file:<br>    $ celery -A proj beat -s /home/celery/var/run/celerybeat-schedule</p>
+<h1 id="文档learning"><a href="#文档learning" class="headerlink" title="文档learning"></a>文档learning</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#只有加入bind=True, self才可以指向当前Task instance。</span></div><div class="line"><span class="meta">@app.task(bind=True)</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">debug_task</span><span class="params">(self)</span>:</span></div><div class="line">    print(<span class="string">'Request: &#123;0!r&#125;'</span>.format(self.request)) <span class="comment">#将self.request 用repr() format成串</span></div></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> celery <span class="keyword">import</span> shared_task</div><div class="line"><span class="comment">#shared_task 表示可重用的task，没有上下文信息，只需要参数</span></div><div class="line"><span class="meta">@shared_task</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">add</span><span class="params">(x, y)</span>:</span></div><div class="line">    <span class="keyword">return</span> x + y</div></pre></td></tr></table></figure>
+<p>停止worker<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">ps auxww | grep &apos;celery worker&apos; | awk &apos;&#123;print $2&#125;&apos; | xargs kill -9</div><div class="line">通常情况下，当前执行的task会丢失。但是如果task有设置acks_late选项，就不会看起来。</div></pre></td></tr></table></figure></p>
+<p>重启worker<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line">celery multi start 1 -A proj -l info -c4 --pidfile=/var/run/celery/%n.pid</div><div class="line">celery multi restart 1 --pidfile=/var/run/celery/%n.pid</div><div class="line">或者</div><div class="line">kill -HUP $pid</div><div class="line"></div><div class="line">celery multi restart 1 -A FBA_Recall_Sys --logfile=./log/celery1.log --pidfile=./log/celery1.pid</div><div class="line"></div><div class="line">[kevin@localhost freshingstock]$ ps -auxww | grep &quot;celery&quot;</div><div class="line">kevin    29556  8.8  1.3 330708 56280 ?        S    10:08   0:00 [celeryd: celery1@localhost.localdomain:MainProcess] -active- (worker -A FBA_Recall_Sys --logfile=./log/celery1.log --pidfile=./log/celery1.pid --hostname=celery1@localhost.localdomain)</div><div class="line">kevin    29567  0.0  1.1 330296 45924 ?        S    10:08   0:00 [celeryd: celery1@localhost.localdomain:Worker-1]</div><div class="line">kevin    29568  0.0  1.1 330296 45912 ?        S    10:08   0:00 [celeryd: celery1@localhost.localdomain:Worker-2]</div><div class="line">kevin    29569  0.0  1.1 330296 45928 ?        S    10:08   0:00 [celeryd: celery1@localhost.localdomain:Worker-3]</div><div class="line">kevin    29570  0.0  1.1 330296 45840 ?        S    10:08   0:00 [celeryd: celery1@localhost.localdomain:Worker-4]</div><div class="line">kevin    29574  0.0  0.0 118504  2388 pts/11   S+   10:08   0:00 grep --color=auto celery</div><div class="line">[kevin@localhost freshingstock]$ ps --ppid 29556</div><div class="line">  PID TTY          TIME CMD</div><div class="line">29567 ?        00:00:00 [celeryd: celer</div><div class="line">29568 ?        00:00:00 [celeryd: celer</div><div class="line">29569 ?        00:00:00 [celeryd: celer</div><div class="line">29570 ?        00:00:00 [celeryd: celer</div><div class="line"></div><div class="line">可以看到一个主进程，下面4个子进程</div><div class="line"></div><div class="line">celery multi restart 1 -A FBA_Recall_Sys -n worker.%h --logfile=./log/%n-%i.log --pidfile=./log/celery1.pid --autoreload</div><div class="line">会把5个进程的log，单独定位到对应的log</div><div class="line"></div><div class="line">标注 文档提到multiprocessing 和 eventlet。简单看来eventlet，看起来能够在IO 阻塞相关的多线程情形下有很大作用，类似一个CPU，多线程一致。</div><div class="line">虽然 eventlet 封装成了非常类似标准线程库的形式，但线程和eventlet在实际并发执行流程仍然有明显区别。在没有出现 I/O 阻塞时，除非显式声明，否则当前正在执行的 eventlet 永远不会把 cpu 交给其他的 eventlet，而标准线程则是无论是否出现阻塞，总是由所有线程一起争夺运行资源。</div></pre></td></tr></table></figure></p>
+<p>Remote Control</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">就是可以观察Celery 组件的相关内容。</div><div class="line">http://docs.celeryproject.org/en/latest/userguide/monitoring.html#monitoring-control</div><div class="line">提到几个相关组件，Flower， Curses Monitor</div></pre></td></tr></table></figure>
+<p>Cocurrency</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">并发问题，目前可以看到实际应用中的情况，一个QueueServer， worker Server。假如worker Server在一台设备上。一种是celery官网上的CookBook 实例，另外一种是</div><div class="line">启动多个celery node通过命令。</div><div class="line">celery worker -A proj --cocurrency = 1 -Q Q1</div><div class="line">celery worker -A proj --cocurrency = 4 -Q Q2</div></pre></td></tr></table></figure>
+<p>Exchanges, queues, and routing keys</p>
+<figure class="highlight django"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="xml">消息发到exchange，可能会是多个exchange么？</span></div><div class="line">exchange 然后路由到多个queue</div><div class="line">消息在queue里会被消费</div></pre></td></tr></table></figure>
+<h1 id="flower"><a href="#flower" class="headerlink" title="flower"></a>flower</h1><p>安装 sudo pip install flower</p>
+<p>如何使用:<br>celery multi restart 1 -A FBA_Recall_Sys –logfile=./log/celery1.log –pidfile=./log/celery1.pid<br>启动celery 进程池，会依连接到FBA_Recall_Sys下的settings.py里关于celery broker的配置。<br>然后通过<br>sudo rabbitmq-plugins enable rabbitmq_management<br>开启 Rabbitmq的API，这个会被flower调用到<br>然后 celery -A FBA_Recall_Sys flower<br>默认会开启一个local server，端口是5555<br><img src="/img/flower_main.png" alt="flower_main" title="flower_main"></p>
+<p>关于控制cocurrency<br><img src="/img/flower_worker_control.png" alt="flower_worker_control" title="flower_worker_control"></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/django/" rel="tag">#django</a>
+          
+            <a href="/tags/python/" rel="tag">#python</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/07/22/html-css-javascript/" rel="next" title="html+css+javascript">
+                <i class="fa fa-chevron-left"></i> html+css+javascript
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/08/02/python/" rel="prev" title="python">
+                python <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/08/02/celery/"
+           data-title="celery" data-url="http://yoursite.com/2016/08/02/celery/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="HQM" />
+          <p class="site-author-name" itemprop="name">HQM</p>
+          <p class="site-description motion-element" itemprop="description"></p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">15</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#安装celery"><span class="nav-number">1.</span> <span class="nav-text">安装celery</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#使用example"><span class="nav-number">2.</span> <span class="nav-text">使用example</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-利用memcache-控制同一个task只会在同一时刻运行一个"><span class="nav-number">2.1.</span> <span class="nav-text">1.利用memcache 控制同一个task只会在同一时刻运行一个</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-Periodic-Tasks（计划任务）"><span class="nav-number">2.2.</span> <span class="nav-text">2.Periodic Tasks（计划任务）</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#文档learning"><span class="nav-number">3.</span> <span class="nav-text">文档learning</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#flower"><span class="nav-number">4.</span> <span class="nav-text">flower</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">HQM</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"swordhqm"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/vendors/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

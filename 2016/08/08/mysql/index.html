@@ -1,0 +1,677 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="数据库," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="关于配置配置文件地点一般在 /etc/my.cnf /etc/my.cnf.d/*
+键入mysql --help 可以看到加载配置文件的地方
+键入mysql_config 可以看到mysql编译时候的配置情况，尤其是 --socket 对应的位置
+django 下面如果连接mysql 出问题在socket文件路径不对的情况下，可以修改
+@ -102,7 +102,7 @@ DATABASES =">
+<meta property="og:type" content="article">
+<meta property="og:title" content="mysql">
+<meta property="og:url" content="http://yoursite.com/2016/08/08/mysql/index.html">
+<meta property="og:site_name" content="HQM">
+<meta property="og:description" content="关于配置配置文件地点一般在 /etc/my.cnf /etc/my.cnf.d/*
+键入mysql --help 可以看到加载配置文件的地方
+键入mysql_config 可以看到mysql编译时候的配置情况，尤其是 --socket 对应的位置
+django 下面如果连接mysql 出问题在socket文件路径不对的情况下，可以修改
+@ -102,7 +102,7 @@ DATABASES =">
+<meta property="og:updated_time" content="2017-03-23T18:52:18.192Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="mysql">
+<meta name="twitter:description" content="关于配置配置文件地点一般在 /etc/my.cnf /etc/my.cnf.d/*
+键入mysql --help 可以看到加载配置文件的地方
+键入mysql_config 可以看到mysql编译时候的配置情况，尤其是 --socket 对应的位置
+django 下面如果连接mysql 出问题在socket文件路径不对的情况下，可以修改
+@ -102,7 +102,7 @@ DATABASES =">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2016/08/08/mysql/"/>
+
+  <title> mysql | HQM </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?a5387da778a8415e415fe2e1439ac110";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">HQM</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                mysql
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-08-08T16:35:01-04:00" content="2016-08-08">
+              2016-08-08
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/技术/" itemprop="url" rel="index">
+                    <span itemprop="name">技术</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/08/08/mysql/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/08/08/mysql/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="关于配置"><a href="#关于配置" class="headerlink" title="关于配置"></a>关于配置</h1><pre><code>配置文件地点一般在 /etc/my.cnf /etc/my.cnf.d/*
+键入mysql --help 可以看到加载配置文件的地方
+键入mysql_config 可以看到mysql编译时候的配置情况，尤其是 --socket 对应的位置
+django 下面如果连接mysql 出问题在socket文件路径不对的情况下，可以修改
+@ -102,7 +102,7 @@ DATABASES = {
+        &apos;NAME&apos;: &apos;FBA_Recall&apos;,
+        &apos;USER&apos;: &apos;root&apos;,
+        &apos;PASSWORD&apos;: &apos;&apos;,
+-       &apos;HOST&apos;: &apos;localhost&apos;,   # Or an IP Address that your DB is hosted on
++       &apos;HOST&apos;: &apos;/var/lib/mysql/mysql.sock&apos;,   # Or an IP Address that your DB is hosted on
+    }
+}
+
+如果采用nix作为包管理，里面可以安装mariadb server 和 mariadb client. 但是看起来cnf文件写法与/etc/my.cnf 一致，所以需要自己手动配置cnf，具体没有直接实施，但是可以确定，一旦成功，可以多个nix环境，多个数据库。
+目前方式，直接在host安装mariaddb，包括client和server。这样在/etc/下就有了默认的配置文件。而nix，nix里的mysqld 应该可以直接跑起来，但是mysql 跑步起来，因为
+</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">[nix-shell:~/maylink-llc/source/freshingstock]$ cat /etc/my.cnf</div><div class="line">#</div><div class="line"># This group is read both both by the client and the server</div><div class="line"># use it for options that affect everything</div><div class="line">#</div><div class="line">[client-server]</div><div class="line"></div><div class="line">#</div><div class="line"># This group is read by the server</div><div class="line">#</div><div class="line">[mysqld]</div><div class="line"># Disabling symbolic-links is recommended to prevent assorted security risks</div><div class="line">symbolic-links=0</div><div class="line"></div><div class="line">#</div><div class="line"># include all files from the config directory</div><div class="line">#</div><div class="line">!includedir /etc/my.cnf.d</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre></td><td class="code"><pre><div class="line">[nix-shell:~/maylink-llc/source/freshingstock]$ cat /etc/my.cnf.d/mariadb-server.cnf </div><div class="line">#</div><div class="line"># These groups are read by MariaDB server.</div><div class="line"># Use it for options that only the server (but not clients) should see</div><div class="line">#</div><div class="line"># See the examples of server my.cnf files in /usr/share/mysql/</div><div class="line">#</div><div class="line"></div><div class="line"># this is read by the standalone daemon and embedded servers</div><div class="line">[server]</div><div class="line"></div><div class="line"># this is only for the mysqld standalone daemon</div><div class="line"># Settings user and group are ignored when systemd is used.</div><div class="line"># If you need to run mysqld under a different user or group,</div><div class="line"># customize your systemd unit file for mysqld/mariadb according to the</div><div class="line"># instructions in http://fedoraproject.org/wiki/Systemd</div><div class="line">[mysqld]</div><div class="line">datadir=/var/lib/mysql</div><div class="line">socket=/var/lib/mysql/mysql.sock</div><div class="line">log-error=/var/log/mariadb/mariadb.log</div><div class="line">pid-file=/var/run/mariadb/mariadb.pid</div><div class="line"></div><div class="line"></div><div class="line"># this is only for embedded server</div><div class="line">[embedded]</div><div class="line"></div><div class="line"># This group is only read by MariaDB servers, not by MySQL.</div><div class="line"># If you use the same .cnf file for MySQL and MariaDB,</div><div class="line"># you can put MariaDB-only options here</div><div class="line">[mariadb]</div><div class="line"></div><div class="line"># This group is only read by MariaDB-10.0 servers.</div><div class="line"># If you use the same .cnf file for MariaDB of different versions,</div><div class="line"># use this group for options that older servers don&apos;t understand</div><div class="line">[mariadb-10.0]</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">[nix-shell:~/maylink-llc/source/freshingstock]$ cat /etc/my.cnf.d/client.cnf </div><div class="line">#</div><div class="line"># These two groups are read by the client library</div><div class="line"># Use it for options that affect all clients, but not the server</div><div class="line">#</div><div class="line"></div><div class="line"></div><div class="line">[client]</div><div class="line">socket=/var/lib/mysql/mysql.sock</div><div class="line"># This group is not read by mysql client library,</div><div class="line"># If you use the same .cnf file for MySQL and MariaDB,</div><div class="line"># use it for MariaDB-only client options</div><div class="line">[client-mariadb]</div></pre></td></tr></table></figure>
+<pre><code>可以看到mysql client端并没有做明确配置，所以--socket 沿用原来编译时候的设置，如果nix环境下安装的mariaddb 和 host环境的mariadb 的编译环境不一致就会出现这个问题
+</code></pre><h1 id="不熟悉的command"><a href="#不熟悉的command" class="headerlink" title="不熟悉的command"></a>不熟悉的command</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div></pre></td><td class="code"><pre><div class="line">#查看mysql用的字符集，注意utf8mb4 会比 utf8 多一个字节，然后主键的长度是有限制，然后比如在django里sync db时候原来utf8字符集的tabel如果主键的长度刚刚符合mysql的要求，但是如果倒进utf8mb4的database，就会出现主键长度过长的问题。只有特定的情况下，primary key的长度限制是可修改的，具体check mysql 手册。</div><div class="line">mysqladmin -u root -p var | grep -E &apos;character|collation&apos; | tr -s &apos; &apos;</div><div class="line"></div><div class="line">MariaDB [(none)]&gt; show variables like &apos;%character%&apos;;</div><div class="line">+--------------------------+------------------------------+</div><div class="line">| Variable_name            | Value                        |</div><div class="line">+--------------------------+------------------------------+</div><div class="line">| character_set_client     | utf8                         |</div><div class="line">| character_set_connection | utf8                         |</div><div class="line">| character_set_database   | latin1                       |</div><div class="line">| character_set_filesystem | binary                       |</div><div class="line">| character_set_results    | utf8                         |</div><div class="line">| character_set_server     | latin1                       |</div><div class="line">| character_set_system     | utf8                         |</div><div class="line">| character_sets_dir       | /usr/share/mariadb/charsets/ |</div><div class="line">+--------------------------+------------------------------+</div><div class="line">8 rows in set (0.01 sec)</div><div class="line"></div><div class="line">character_set_database和character_set_server的默认字符集还是latin1。</div><div class="line"></div><div class="line">其实在mariadb5.5 里只用修改mysqld 就好</div><div class="line">二、最简单的完美修改方法，修改mysql的my.cnf文件中的字符集键值（注意配置的字段细节）：</div><div class="line"></div><div class="line">1、在[client]字段里加入default-character-set=utf8，如下：</div><div class="line"></div><div class="line">[client]</div><div class="line">port = 3306</div><div class="line">socket = /var/lib/mysql/mysql.sock</div><div class="line">default-character-set=utf8</div><div class="line"></div><div class="line">2、在[mysqld]字段里加入character-set-server=utf8，如下：</div><div class="line"></div><div class="line">[mysqld]</div><div class="line">port = 3306</div><div class="line">socket = /var/lib/mysql/mysql.sock</div><div class="line">character-set-server=utf8</div><div class="line"></div><div class="line">3、在[mysql]字段里加入default-character-set=utf8，如下：</div><div class="line"></div><div class="line">[mysql]</div><div class="line">no-auto-rehash</div><div class="line">default-character-set=utf8</div><div class="line"></div><div class="line">修改完成后，service mysql restart重启mysql服务就生效。注意：[mysqld]字段与[mysql]字段是有区别的。这点在网上没人反馈过。</div><div class="line"></div><div class="line">使用SHOW VARIABLES LIKE ‘character%’;查看，发现数据库编码全已改成utf8。</div><div class="line"></div><div class="line">+--------------------------+----------------------------+</div><div class="line">| Variable_name | Value |</div><div class="line">+--------------------------+----------------------------+</div><div class="line">| character_set_client | utf8 |</div><div class="line">| character_set_connection | utf8 |</div><div class="line">| character_set_database | utf8 |</div><div class="line">| character_set_filesystem | binary |</div><div class="line">| character_set_results | utf8 |</div><div class="line">| character_set_server | utf8 |</div><div class="line">| character_set_system | utf8 |</div><div class="line">| character_sets_dir | /usr/share/mysql/charsets/ |</div><div class="line">+--------------------------+----------------------------+</div><div class="line"></div><div class="line">#临时无视约束改动数据表</div><div class="line">SET FOREIGN_KEY_CHECKS=0;</div><div class="line">SET FOREIGN_KEY_CHECKS=1;</div></pre></td></tr></table></figure>
+<h1 id="order-by-和-distinct"><a href="#order-by-和-distinct" class="headerlink" title="order_by 和 distinct"></a>order_by 和 distinct</h1><p>解决问题：一堆记录，选择符合条件的最近几条不重复记录</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">注释：做两个集合，其实是一样内容 g,v</div><div class="line">对g中每条数据的shelf_mark 在v中过滤出来相同的集合， 如果满足g中这条数据的时间恰好最大，就取出来。</div><div class="line">最后把g中符合条件的数据按时间排序</div><div class="line">参考链接https://www.ibm.com/developerworks/community/blogs/SQLTips4DB2LUW/entry/distinct_order_by?lang=en</div><div class="line"></div><div class="line">select id, shelf_mark from </div><div class="line">(select * from loc_shelf_history where location_id=744) g </div><div class="line">where </div><div class="line">g.last_modify_time in </div><div class="line">(select max(last_modify_time) </div><div class="line">from </div><div class="line">(select * from loc_shelf_history where location_id = 744) v </div><div class="line">where </div><div class="line">g.shelf_mark = v.shelf_mark) </div><div class="line">order by last_modify_time desc;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">SELECT name , firstname FROM guests GROUP BY name , firstname ORDER BY MAX(visit) ASC</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">row_number() OVER (PARTITION BY COL1 ORDER BY COL2) 表示根据COL1分组，在分组内部根据 COL2排序，而此函数计算的值就表示每组内部排序后的顺序编号（组内连续的唯一的)</div><div class="line">SELECT name, firstname </div><div class="line">  FROM(SELECT ROW_NUMBER() OVER(PARTITION BY name, firstname ORDER BY visit DESC) AS rn, name, firstname, visit</div><div class="line">         FROM guests)</div><div class="line">  WHERE rn = 1</div><div class="line">  ORDER BY visit;</div></pre></td></tr></table></figure>
+<h1 id="extract-table-from-dump-file"><a href="#extract-table-from-dump-file" class="headerlink" title="extract table from dump file"></a>extract table from dump file</h1><p><a href="https://blog.tsheets.com/2008/business-help/extract-a-single-table-from-a-mysqldump-file" target="_blank" rel="external">https://blog.tsheets.com/2008/business-help/extract-a-single-table-from-a-mysqldump-file</a></p>
+<h1 id="mysql-collation"><a href="#mysql-collation" class="headerlink" title="mysql collation"></a>mysql collation</h1><p>key words: Encoding, Charset, 字符集，utf8mb4_general_ci， latin1_swedish_ci<br>查看方法：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">show full columns from postman_message;</div></pre></td></tr></table></figure></p>
+<p><a href="https://dev.mysql.com/doc/refman/5.7/en/charset.html" target="_blank" rel="external">手册地址</a><br><a href="https://blog.ionelmc.ro/2014/12/28/terrible-choices-mysql/#id18" target="_blank" rel="external">django collations 设置</a><br>mysql 有四个层级的字符集设置:server, database, table, and column<br>server 级别默认的执行情况为latin1, 可以通过修改，或者通过编译时候就指定特定字符集，具体参考手册。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">shell&gt; mysqld</div><div class="line">shell&gt; mysqld --character-set-server=latin1</div><div class="line">shell&gt; mysqld --character-set-server=latin1 \</div><div class="line">           --collation-server=latin1_swedish_ci</div></pre></td></tr></table></figure></p>
+<p>database 层级<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">SELECT @@character_set_database, @@collation_database;</div><div class="line">CREATE DATABASE db_name</div><div class="line">    [[DEFAULT] CHARACTER SET charset_name]</div><div class="line">    [[DEFAULT] COLLATE collation_name]</div><div class="line"></div><div class="line">ALTER DATABASE db_name</div><div class="line">    [[DEFAULT] CHARACTER SET charset_name]</div><div class="line">    [[DEFAULT] COLLATE collation_name]</div><div class="line"></div><div class="line">alter database FBA_Recall CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;</div></pre></td></tr></table></figure></p>
+<p>#判断field 落在字符串中</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">select * from Mix_Package_ID where instr(&apos;1001901771820001606600672130056791&apos;, Mix_Package_ID.track_number_text);</div></pre></td></tr></table></figure>
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/数据库/" rel="tag">#数据库</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/08/08/google-cloudprint/" rel="next" title="google_cloudprint">
+                <i class="fa fa-chevron-left"></i> google_cloudprint
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/08/19/note/" rel="prev" title="note">
+                note <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/08/08/mysql/"
+           data-title="mysql" data-url="http://yoursite.com/2016/08/08/mysql/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="HQM" />
+          <p class="site-author-name" itemprop="name">HQM</p>
+          <p class="site-description motion-element" itemprop="description"></p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">15</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#关于配置"><span class="nav-number">1.</span> <span class="nav-text">关于配置</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#不熟悉的command"><span class="nav-number">2.</span> <span class="nav-text">不熟悉的command</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#order-by-和-distinct"><span class="nav-number">3.</span> <span class="nav-text">order_by 和 distinct</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#extract-table-from-dump-file"><span class="nav-number">4.</span> <span class="nav-text">extract table from dump file</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#mysql-collation"><span class="nav-number">5.</span> <span class="nav-text">mysql collation</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">HQM</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"swordhqm"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/vendors/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,648 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="python," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="python坑http://www.phyast.pitt.edu/~micheles/python/super.pdf关于多继承里super理解。记住MRO 和C3 算法：http://www.phperz.com/article/14/0930/26695.html
+debug 方式链接
+python list 去重方法1234567891011121314151617181920212223">
+<meta property="og:type" content="article">
+<meta property="og:title" content="python">
+<meta property="og:url" content="http://yoursite.com/2016/08/02/python/index.html">
+<meta property="og:site_name" content="HQM">
+<meta property="og:description" content="python坑http://www.phyast.pitt.edu/~micheles/python/super.pdf关于多继承里super理解。记住MRO 和C3 算法：http://www.phperz.com/article/14/0930/26695.html
+debug 方式链接
+python list 去重方法1234567891011121314151617181920212223">
+<meta property="og:updated_time" content="2017-01-31T22:39:37.635Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="python">
+<meta name="twitter:description" content="python坑http://www.phyast.pitt.edu/~micheles/python/super.pdf关于多继承里super理解。记住MRO 和C3 算法：http://www.phperz.com/article/14/0930/26695.html
+debug 方式链接
+python list 去重方法1234567891011121314151617181920212223">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2016/08/02/python/"/>
+
+  <title> python | HQM </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?a5387da778a8415e415fe2e1439ac110";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">HQM</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                python
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-08-02T17:54:05-04:00" content="2016-08-02">
+              2016-08-02
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/技术/" itemprop="url" rel="index">
+                    <span itemprop="name">技术</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/08/02/python/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/08/02/python/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="python坑"><a href="#python坑" class="headerlink" title="python坑"></a>python坑</h1><p><a href="http://www.phyast.pitt.edu/~micheles/python/super.pdf" target="_blank" rel="external">http://www.phyast.pitt.edu/~micheles/python/super.pdf</a><br>关于多继承里super理解。记住MRO 和C3 算法：<br><a href="http://www.phperz.com/article/14/0930/26695.html" target="_blank" rel="external">http://www.phperz.com/article/14/0930/26695.html</a></p>
+<h1 id="debug-方式"><a href="#debug-方式" class="headerlink" title="debug 方式"></a>debug 方式</h1><p><a href="http://yangyingchao.github.io/%E6%88%91%E5%B8%B8%E7%94%A8%E7%9A%84-Python-%E8%B0%83%E8%AF%95%E5%B7%A5%E5%85%B7-%E5%8D%9A%E5%AE%A2-%E4%BC%AF%E4%B9%90%E5%9C%A8%E7%BA%BF/" target="_blank" rel="external">链接</a></p>
+<h1 id="python-list-去重方法"><a href="#python-list-去重方法" class="headerlink" title="python list 去重方法"></a>python list 去重方法</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 方法1</span></div><div class="line">ids = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>,<span class="number">1</span>]</div><div class="line">news_ids = []</div><div class="line"><span class="keyword">for</span> id <span class="keyword">in</span> ids:</div><div class="line">    <span class="keyword">if</span> id <span class="keyword">not</span> <span class="keyword">in</span> news_ids:</div><div class="line">        news_ids.append(id)</div><div class="line"></div><div class="line"><span class="keyword">print</span> news_ids</div><div class="line"></div><div class="line"><span class="comment"># 方法2</span></div><div class="line">ids = [<span class="number">1</span>,<span class="number">4</span>,<span class="number">3</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>,<span class="number">1</span>]</div><div class="line">news_ids = list(set(ids))</div><div class="line">news_ids.sort(key=ids.index)   <span class="comment"># 感谢网友：@Magic 指正。</span></div><div class="line"></div><div class="line"><span class="comment"># 方法3</span></div><div class="line">ids = [<span class="number">1</span>,<span class="number">4</span>,<span class="number">3</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>,<span class="number">1</span>]</div><div class="line">ids.sort()</div><div class="line">it = itertools.groupby(ids)</div><div class="line"></div><div class="line"><span class="keyword">for</span> k, g <span class="keyword">in</span> it:</div><div class="line">    <span class="keyword">print</span> k</div><div class="line"></div><div class="line"><span class="comment"># 方法4</span></div><div class="line"><span class="comment">#思路其实就是先把ids变为[[], 1,4,3,......] ,然后在利用reduce的特性。reduce解释参看这http://docs.python.org/2/library/functions.html#reduce</span></div><div class="line">In [<span class="number">5</span>]: ids = [<span class="number">1</span>,<span class="number">4</span>,<span class="number">3</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>,<span class="number">1</span>]</div><div class="line"></div><div class="line">In [<span class="number">6</span>]: func = <span class="keyword">lambda</span> x,y:x <span class="keyword">if</span> y <span class="keyword">in</span> x <span class="keyword">else</span> x + [y]</div><div class="line"></div><div class="line">In [<span class="number">7</span>]: reduce(func, [[], ] + ids)</div><div class="line">Out[<span class="number">7</span>]: [<span class="number">1</span>, <span class="number">4</span>, <span class="number">3</span>, <span class="number">2</span>, <span class="number">5</span>, <span class="number">6</span>]</div></pre></td></tr></table></figure>
+<h1 id="多进程"><a href="#多进程" class="headerlink" title="多进程"></a>多进程</h1><p>subprocess 执行外部程序，通过管道进行文本交流。<br>multiprocessing 有Lock/Event/Semaphore/Condition管理同步这些资源可能都是基于内核级别资源实现的，共享资源可以用共享内存和Manager。</p>
+<h1 id="dir看不见的特殊方法"><a href="#dir看不见的特殊方法" class="headerlink" title="dir看不见的特殊方法"></a>dir看不见的特殊方法</h1><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line">5.13. Special Attributes</div><div class="line">The implementation adds a few special read-only attributes to several object types, where they are relevant. Some of these are not reported by the dir() built-in function.</div><div class="line"></div><div class="line">object.__dict__</div><div class="line">A dictionary or other mapping object used to store an object’s (writable) attributes.</div><div class="line"></div><div class="line">object.__methods__</div><div class="line">Deprecated since version 2.2: Use the built-in function dir() to get a list of an object’s attributes. This attribute is no longer available.</div><div class="line">object.__members__</div><div class="line">Deprecated since version 2.2: Use the built-in function dir() to get a list of an object’s attributes. This attribute is no longer available.</div><div class="line">instance.__class__</div><div class="line">The class to which a class instance belongs.</div><div class="line"></div><div class="line">class.__bases__</div><div class="line">The tuple of base classes of a class object.</div><div class="line"></div><div class="line">definition.__name__</div><div class="line">The name of the class, type, function, method, descriptor, or generator instance.</div><div class="line"></div><div class="line">The following attributes are only supported by new-style classes.</div><div class="line"></div><div class="line">class.__mro__</div><div class="line">This attribute is a tuple of classes that are considered when looking for base classes during method resolution.</div><div class="line"></div><div class="line">class.mro()</div><div class="line">This method can be overridden by a metaclass to customize the method resolution order for its instances. It is called at class instantiation, and its result is stored in __mro__.</div><div class="line"></div><div class="line">class.__subclasses__()</div><div class="line">Each new-style class keeps a list of weak references to its immediate subclasses. This method returns a list of all those references still alive. Example:</div><div class="line"></div><div class="line">&gt;&gt;&gt;</div><div class="line">&gt;&gt;&gt; int.__subclasses__()</div><div class="line">[&lt;type 'bool'&gt;]</div><div class="line">Footnotes</div></pre></td></tr></table></figure>
+<h1 id="单例"><a href="#单例" class="headerlink" title="单例"></a>单例</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Singleton</span><span class="params">(object)</span>:</span></div><div class="line">  <span class="function"><span class="keyword">def</span> <span class="title">__new__</span><span class="params">(cls)</span>:</span></div><div class="line">    <span class="comment"># 关键在于这，每一次实例化的时候，我们都只会返回这同一个instance对象</span></div><div class="line">    <span class="keyword">if</span> <span class="keyword">not</span> hasattr(cls, <span class="string">'instance'</span>):</div><div class="line">      cls.instance = super(Singleton, cls).__new__(cls)</div><div class="line">    <span class="keyword">return</span> cls.instance</div><div class="line"> </div><div class="line">obj1 = Singleton()</div><div class="line">obj2 = Singleton()</div><div class="line"> </div><div class="line">obj1.attr1 = <span class="string">'value1'</span></div><div class="line"><span class="keyword">print</span> obj1.attr1, obj2.attr1</div><div class="line"><span class="keyword">print</span> obj1 <span class="keyword">is</span> obj2</div></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/python/" rel="tag">#python</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/08/02/celery/" rel="next" title="celery">
+                <i class="fa fa-chevron-left"></i> celery
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/08/08/google-cloudprint/" rel="prev" title="google_cloudprint">
+                google_cloudprint <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/08/02/python/"
+           data-title="python" data-url="http://yoursite.com/2016/08/02/python/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="HQM" />
+          <p class="site-author-name" itemprop="name">HQM</p>
+          <p class="site-description motion-element" itemprop="description"></p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">15</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#python坑"><span class="nav-number">1.</span> <span class="nav-text">python坑</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#debug-方式"><span class="nav-number">2.</span> <span class="nav-text">debug 方式</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#python-list-去重方法"><span class="nav-number">3.</span> <span class="nav-text">python list 去重方法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#多进程"><span class="nav-number">4.</span> <span class="nav-text">多进程</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#dir看不见的特殊方法"><span class="nav-number">5.</span> <span class="nav-text">dir看不见的特殊方法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#单例"><span class="nav-number">6.</span> <span class="nav-text">单例</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">HQM</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"swordhqm"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/vendors/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

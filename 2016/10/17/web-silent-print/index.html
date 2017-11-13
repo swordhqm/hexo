@@ -1,0 +1,661 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="应用场景web 情形下，需要直接打印，不需要预览。
+
+Chrome自身有一个Kiosk Mode参数，如果设置，可以直接在默认打印机打印，这个没去试，但是应该很快，然后对于如果需要多个和多种打印机，比如打印4x2, 4x6 相关的label，其实不是很合适。
+早前的解决方式，比如IE的ActiveX，以及NPAPI，但是Chrome目前已经不再支持NPAPI。
+第三方 lodop(透明格式，非PD">
+<meta property="og:type" content="article">
+<meta property="og:title" content="web silent print">
+<meta property="og:url" content="http://yoursite.com/2016/10/17/web-silent-print/index.html">
+<meta property="og:site_name" content="HQM">
+<meta property="og:description" content="应用场景web 情形下，需要直接打印，不需要预览。
+
+Chrome自身有一个Kiosk Mode参数，如果设置，可以直接在默认打印机打印，这个没去试，但是应该很快，然后对于如果需要多个和多种打印机，比如打印4x2, 4x6 相关的label，其实不是很合适。
+早前的解决方式，比如IE的ActiveX，以及NPAPI，但是Chrome目前已经不再支持NPAPI。
+第三方 lodop(透明格式，非PD">
+<meta property="og:image" content="http://yoursite.com/img/zebra_default_setting_s1.png">
+<meta property="og:image" content="http://yoursite.com/img/zebra_first_setting_s1.png">
+<meta property="og:updated_time" content="2016-10-18T18:14:12.929Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="web silent print">
+<meta name="twitter:description" content="应用场景web 情形下，需要直接打印，不需要预览。
+
+Chrome自身有一个Kiosk Mode参数，如果设置，可以直接在默认打印机打印，这个没去试，但是应该很快，然后对于如果需要多个和多种打印机，比如打印4x2, 4x6 相关的label，其实不是很合适。
+早前的解决方式，比如IE的ActiveX，以及NPAPI，但是Chrome目前已经不再支持NPAPI。
+第三方 lodop(透明格式，非PD">
+<meta name="twitter:image" content="http://yoursite.com/img/zebra_default_setting_s1.png">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2016/10/17/web-silent-print/"/>
+
+  <title> web silent print | HQM </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?a5387da778a8415e415fe2e1439ac110";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">HQM</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                web silent print
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-10-17T14:05:16-04:00" content="2016-10-17">
+              2016-10-17
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/技术/" itemprop="url" rel="index">
+                    <span itemprop="name">技术</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/10/17/web-silent-print/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/10/17/web-silent-print/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="应用场景"><a href="#应用场景" class="headerlink" title="应用场景"></a>应用场景</h1><p>web 情形下，需要直接打印，不需要预览。</p>
+<ul>
+<li>Chrome自身有一个Kiosk Mode参数，如果设置，可以直接在默认打印机打印，这个没去试，但是应该很快，然后对于如果需要多个和多种打印机，比如打印4x2, 4x6 相关的label，其实不是很合适。</li>
+<li>早前的解决方式，比如IE的ActiveX，以及NPAPI，但是Chrome目前已经不再支持NPAPI。</li>
+<li>第三方 lodop(透明格式，非PDF，需要注册)， smartprint(需要注册)</li>
+<li>google cloud(api很完善，但是等待打印时间很长，对于对打印及时性要求不高的情形很适合)</li>
+<li>打印机自身的控制语言，比如zebra条码打印机，有development相关的控制命令，通过命令可以构建label样式，然后通过直接将命令输出到打印机完成打印，没去细看，估计需要蛮多时间。</li>
+<li><a href="http://jasperreports.sourceforge.net/sample.reference/printservice/，" target="_blank" rel="external">http://jasperreports.sourceforge.net/sample.reference/printservice/，</a> JasperReport(license, LGPL). Java报表系~</li>
+<li>pdfbox + java print，这个是目前通过实验，可以满足基本的打印需求。</li>
+</ul>
+<h1 id="构想"><a href="#构想" class="headerlink" title="构想"></a>构想</h1><p>local通过pdfbox 和 java print构建打印服务，browser 向 远端server请求pdf资源，然后将pdf资源提交给local server，local server 完成打印。目前设备zebra 450，主要用于4X2 inch 的Location打印。</p>
+<h1 id="部分关键代码"><a href="#部分关键代码" class="headerlink" title="部分关键代码"></a>部分关键代码</h1><p>远程server返回pdf资源<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">with</span> open(obj_replenish_shipment.label_path, <span class="string">'r'</span>) <span class="keyword">as</span> pdf:</div><div class="line">    response_data = HttpResponse(pdf.read(), mimetype=<span class="string">'application/pdf'</span>)</div><div class="line">    response_data[<span class="string">'Content-Disposition'</span>] = <span class="string">'inline;filename=some_file.pdf'</span></div><div class="line"><span class="keyword">return</span> response_data</div></pre></td></tr></table></figure></p>
+<p>local 请求远程server资源并转递到local server：<br>需要注意的这里用到的是XMLHttpRequest去拿binary内容（也就是pdf内容），ajax不行，如果用ajax需要找ajax的扩充。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line">$(<span class="string">'#DirectPrint_btn'</span>).click(<span class="function"><span class="keyword">function</span>(<span class="params">e</span>)</span>&#123;</div><div class="line">    <span class="keyword">var</span> shelf_id = <span class="built_in">document</span>.getElementById(<span class="string">'print_IDs'</span>).value;</div><div class="line">    <span class="keyword">var</span> box_type = $(<span class="string">"#box_type_check"</span>).is(<span class="string">':checked'</span>) ? <span class="string">'on'</span> : <span class="string">'off'</span>;</div><div class="line">    <span class="keyword">var</span> xhr = <span class="keyword">new</span> XMLHttpRequest();</div><div class="line">    xhr.open(<span class="string">"GET"</span>, <span class="string">"/print_labels?ids="</span>+shelf_id + <span class="string">"&amp;box_type_check="</span>+box_type, <span class="literal">true</span>);</div><div class="line">    xhr.responseType = <span class="string">'arraybuffer'</span>;</div><div class="line">    xhr.onload = <span class="function"><span class="keyword">function</span>(<span class="params">e</span>) </span>&#123;</div><div class="line">        <span class="keyword">var</span> responseArray = <span class="keyword">new</span> <span class="built_in">Uint8Array</span>(<span class="keyword">this</span>.response);</div><div class="line">        <span class="keyword">var</span> blob = <span class="keyword">new</span> Blob([responseArray], &#123;type: <span class="string">'application/pdf'</span>&#125;);</div><div class="line"><span class="comment">//      var fileURL = URL.createObjectURL(blob);</span></div><div class="line"><span class="comment">//      window.open(fileURL);</span></div><div class="line">        <span class="keyword">var</span> formData = <span class="keyword">new</span> FormData();</div><div class="line">        formData.append(<span class="string">"why"</span>, <span class="string">"REQUEST_PRINT"</span>);</div><div class="line">        params = [&#123;</div><div class="line">            <span class="string">"type"</span>: <span class="string">"Location"</span>,</div><div class="line">            <span class="string">"sub_type"</span>: <span class="string">"t1(4x2)"</span>,</div><div class="line">            <span class="string">"file_name"</span>: <span class="string">"xx.pdf"</span>,</div><div class="line">            <span class="string">"page_number_range"</span>: <span class="string">"all"</span>,</div><div class="line">            <span class="string">"count"</span>: <span class="string">"2"</span></div><div class="line">        &#125;];</div><div class="line">        formData.append(<span class="string">"params"</span>, <span class="built_in">JSON</span>.stringify(params));</div><div class="line">        formData.append(<span class="string">"file"</span>, blob, <span class="string">"xx.pdf"</span>); <span class="comment">//file one by one</span></div><div class="line">        </div><div class="line">        <span class="keyword">var</span> request = <span class="keyword">new</span> XMLHttpRequest();</div><div class="line">        request.open(<span class="string">"POST"</span>, <span class="string">"http://localhost:8080/LocalPrinter/service.jsp"</span>, <span class="literal">true</span>);</div><div class="line">        request.send(formData);</div><div class="line">    &#125;</div><div class="line">    xhr.send();</div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
+<p>local server使用apache tomcat搭建，关键部分，zebra 450驱动装好，连接后需要做setting，有两个部分的setting都需要做。<br><img src="/img/zebra_default_setting_s1.png" alt="默认setting" title="--"><br><img src="/img/zebra_first_setting_s1.png" alt="首选项" title="--"></p>
+<p>payload 的parse用的是com.oreilly.servlet.multipart 这个包</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span>(node.position.equals(<span class="string">"localhost"</span>)) &#123;</div><div class="line">    <span class="keyword">try</span> &#123;</div><div class="line">        PrintService  printService = <span class="keyword">null</span>;</div><div class="line">        PrintService[] pServices = PrintServiceLookup.lookupPrintServices(<span class="keyword">null</span>, <span class="keyword">null</span>);</div><div class="line">        <span class="keyword">if</span>(pServices.length == <span class="number">0</span>) &#123;</div><div class="line">            System.out.println(<span class="string">"No print service found."</span>);</div><div class="line">            <span class="keyword">return</span>;</div><div class="line">        &#125;</div><div class="line">        </div><div class="line">        <span class="comment">//define output stream</span></div><div class="line">        FileOutputStream _o = <span class="keyword">null</span>;</div><div class="line">        _o = <span class="keyword">new</span> FileOutputStream(_path + <span class="string">"out.pdf"</span>);</div><div class="line">        </div><div class="line">        <span class="comment">//list printer</span></div><div class="line">        <span class="keyword">if</span> (pServices != <span class="keyword">null</span>)&#123;</div><div class="line">            System.out.println(<span class="string">"listing printers "</span> + pServices.length);</div><div class="line">            </div><div class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;pServices.length;i++)&#123;</div><div class="line">                printService = pServices[i];</div><div class="line">                System.out.println(pServices[i]);</div><div class="line">            &#125;</div><div class="line">            System.out.println(<span class="string">"listing end~"</span>);</div><div class="line">        &#125;</div><div class="line">        </div><div class="line">        <span class="comment">//find printer</span></div><div class="line">        <span class="keyword">boolean</span> find = <span class="keyword">false</span>;</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; pServices.length; i++) &#123;</div><div class="line">            <span class="keyword">if</span>(pServices[i].getName().equals(node.printer_name)) &#123;</div><div class="line">                System.out.println(<span class="string">"*************************************************************"</span>);</div><div class="line">                System.out.println(<span class="string">"find printer: "</span> + node.printer_name);</div><div class="line">                System.out.println(<span class="string">"**************************************************************"</span>);</div><div class="line">                printService = pServices[i];</div><div class="line">                find = <span class="keyword">true</span>;</div><div class="line">                <span class="keyword">break</span>;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">if</span>(!find) <span class="keyword">return</span>;</div><div class="line">        </div><div class="line">        PDDocument document = <span class="keyword">null</span>;</div><div class="line">        document = PDDocument.load(p.file_content);</div><div class="line">        document.save(<span class="keyword">new</span> File(_path + <span class="string">"xx.pdf"</span>));</div><div class="line">        </div><div class="line">        PrinterJob job = PrinterJob.getPrinterJob();</div><div class="line">        job.setPrintService(printService);</div><div class="line">        </div><div class="line">        <span class="comment">//custom format &amp; paper</span></div><div class="line">        PageFormat pf = job.defaultPage();</div><div class="line">        Paper paper = pf.getPaper();</div><div class="line">        paper.setImageableArea(<span class="number">0</span>, <span class="number">0</span>, paper.getWidth(), paper.getHeight());</div><div class="line">        pf.setPaper(paper);</div><div class="line">        pf.setOrientation(PageFormat.PORTRAIT);</div><div class="line">        job.defaultPage(pf);</div><div class="line">        </div><div class="line">        <span class="comment">//Book</span></div><div class="line">        Book book = <span class="keyword">new</span> Book();</div><div class="line">        book.append(<span class="keyword">new</span> PDFPrintable(document), pf, document.getNumberOfPages());</div><div class="line">        </div><div class="line">        job.setPageable(book);</div><div class="line">        </div><div class="line">        PrintRequestAttributeSet job_attrs = <span class="keyword">new</span> HashPrintRequestAttributeSet();</div><div class="line">        <span class="keyword">if</span>(node.type.equals(<span class="string">"Location"</span>) &amp;&amp; node.sub_type.equals(<span class="string">"t1(4x2)"</span>)) &#123;</div><div class="line">            <span class="comment">//job_attrs.add(new MediaSize(2.00f, 4.00f, Size2DSyntax.INCH));</span></div><div class="line">            job_attrs.add(<span class="keyword">new</span> MediaPrintableArea(<span class="number">0</span>, <span class="number">0</span>, <span class="number">4</span>, <span class="number">2</span>, MediaPrintableArea.INCH));</div><div class="line">        &#125;</div><div class="line">        </div><div class="line">        job.print(job_attrs);</div><div class="line">        System.out.print(<span class="string">"Pushing job"</span>);</div><div class="line">        </div><div class="line">        document.close();</div><div class="line">        _o.close();</div><div class="line">    &#125; <span class="keyword">catch</span> (Exception e) &#123;</div><div class="line">        e.printStackTrace();</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    System.out.println(<span class="string">"Printing launched, please wait..."</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/09/29/nix/" rel="next" title="nix">
+                <i class="fa fa-chevron-left"></i> nix
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/10/19/rabbitMQ/" rel="prev" title="rabbitMQ">
+                rabbitMQ <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/10/17/web-silent-print/"
+           data-title="web silent print" data-url="http://yoursite.com/2016/10/17/web-silent-print/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="HQM" />
+          <p class="site-author-name" itemprop="name">HQM</p>
+          <p class="site-description motion-element" itemprop="description"></p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">15</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#应用场景"><span class="nav-number">1.</span> <span class="nav-text">应用场景</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#构想"><span class="nav-number">2.</span> <span class="nav-text">构想</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#部分关键代码"><span class="nav-number">3.</span> <span class="nav-text">部分关键代码</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">HQM</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"swordhqm"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/vendors/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
