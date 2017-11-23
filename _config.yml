@@ -69,9 +69,18 @@ theme: next
 baidu_analytics: a5387da778a8415e415fe2e1439ac110
 ###
 
+###
+search:
+  path: search.xml
+  field: post
+  format: html
+  limit: 10000
+###
+
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
   type: git
-  repository: https://github.com/swordhqm/swordhqm.github.io.git
+#  repository: https://github.com/swordhqm/swordhqm.github.io.git
+  repository: git@107.174.205.186:/home/git/hexo.git
   branch: master

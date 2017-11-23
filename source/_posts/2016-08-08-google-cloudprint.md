@@ -2,9 +2,10 @@
 title: google_cloudprint
 date: 2016-08-08 15:01:58
 tags:
-    - open
+    - print
+    - tool
 category::
-    - 技术
+    - IT
 ---
 
 # cloudprint

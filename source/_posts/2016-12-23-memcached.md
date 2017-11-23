@@ -1,8 +1,8 @@
 ---
 title: memcached
 date: 2016-12-23 10:37:22
-tags:
-category: 技术
+tags: cache
+category: IT
 ---
 # Ref
 [Memcache 内存分配策略和性能(使用)状态检查](http://www.cnblogs.com/zhoujinyi/p/5554083.html)

@@ -6,7 +6,7 @@ tags:
     - css
     - javascript
 categories:
-    - 技术
+    - IT
 ---
 # 需要用到的链接
 [web api](https://developer.mozilla.org/en-US/)

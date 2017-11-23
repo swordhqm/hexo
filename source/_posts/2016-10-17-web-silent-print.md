@@ -1,8 +1,10 @@
 ---
 title: web silent print
 date: 2016-10-17 14:05:16
-tags:
-category: 技术
+tags: 
+    - print
+    - tool
+category: IT
 ---
 
 # 应用场景
